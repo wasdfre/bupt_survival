@@ -1,0 +1,99 @@
+<!--question.wxml-->
+<view class="container">
+    <view class="question-wrp">
+        <view class="question-item">
+            <view class="que-tag">
+                <text class="tag">阅读</text>
+                <text class="tag">电子书</text>
+                <text class="tag">Kindle</text>
+                <text class="tag">书籍</text>
+                <text class="tag">文学</text>
+            </view>
+            <view class="que-title">
+                <text>{{PageData.Question}}</text>
+            </view>
+            <view class="que-content">
+                {{PageData.Questiondes}}
+                <!-- 这里等待修改 -->
+            </view>
+            
+            <view class="que-follow">
+                <view class="left">
+                    <!-- 点赞总数 -->
+                    <view class="watch">
+                        <image src="../../images/eye.png"></image>
+                        <text>{{Up_Record_num}}</text>
+                    </view>
+                    <!-- 回答总数-->
+                    <view class="comment">
+                        <image src="../../images/comment2.png"></image>
+                        <text>{{Reply_Record_num}}</text>
+                    </view>
+                </view>
+                <!-- 关注列表-->
+                <view class="right" bindtap='Touch' data-post_id="{{PostUserData}}" data-postopenid="{{PostUserId}}" data-nowIndex="{{PageId}}">
+                   <text> 回答</text> 
+                </view>
+                <!-- </view> -->
+            </view>
+        </view>
+        
+        <view class="que-operate flex-wrp">
+            <!-- 邀请回答 -->
+            <view class="invite flex-item" bindtap='upclickbutton' data-post_id="{{PageId}}" data-postopenid="{{PostUserId}}">
+                <image src="../../images/invite.png"></image>
+                <text>点赞</text>
+            </view>
+            <!-- 自己写回答——即评论-->
+            <view class="write flex-item" bindtap='downclickbutton'  data-post_id="{{PageId}}" data-postopenid="{{PostUserId}}">
+                <image src="../../images/write.png" ></image>
+                <text>点踩</text>
+            </view>
+        </view>
+    </view>
+    <!-- class是否不同 -->
+    <view class="answer-feed">
+        <!-- 一个答案主体 -->
+        <block wx:for="{{dataArray}}" wx:key="key" wx:index="index">
+            <view  bindtap="bindItemTap" class="feed-item">
+                <!-- 第一层头像和姓名-->
+                <view class="feed-source">
+                    <a class="" bindTap="">
+                        <view class="avatar">
+                            <image src="{{item.image}}"></image>
+                        </view>
+                        <text>{{item.name}}</text>
+                    </a>
+                </view>
+                
+                <view class="feed-content">
+                    <!-- 第二层 内容主体-->
+                    <view class="answer-body">
+                        <view>
+                            <text 
+                                bindlongpress="showModal" 
+                                data-target="bottomModal">
+                                {{item.context}}
+                            </text>
+                            <!-- <text class="answer-txt"> </text> -->
+                        </view>
+                        <!-- 第三层，点赞数，评论，时间 -->
+                        <view class="answer-actions">
+                            <view class="like dot">
+                                <a>3.9K 赞同 </a>
+                            </view>
+                            <view class="comments dot">
+                                <a>254 评论 </a>
+                            </view>
+                            <view class="time">
+                                <a>2 个月前</a>
+                            </view>
+
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+

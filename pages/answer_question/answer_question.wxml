@@ -1,0 +1,42 @@
+
+<!-- 第一层 -->
+<view class='head_view'>
+ <view class="text_view">
+ <!-- 创建交流topic界面 -->
+ <!-- autofoucus -->
+    <textarea placeholder="请填写回答内容 (不少于2个字)" auto-focus maxlength="50" auto-focus="{{false}}" bindinput="getInput"/>
+  </view>
+</view>
+
+<!-- 第二层 -->
+<view class='main_view'>
+ <view class="three_view">
+  <view>
+    <view style="font-size:36rpx">
+    添加图片
+    </view>
+    <view class="pictuer_text">
+     图片仅支持6张
+    </view>
+  </view>
+ <!-- 显示添加的图片 -->
+  <view class="pictuer_view">
+
+  <block wx:for="{{number}}" wx:if="{{index!=6}}" wx:key="key">
+     <!-- 0 -->
+      <block wx:if="{{index==number-1 }}">
+        <image src="../../images/add.png" style="width:160rpx;height:160rpx;border:1rpx solid silver;"bindtap='addImage' ></image>
+      </block>
+       <!-- >0-->
+      <block wx:else>
+        <image src="{{Filepath[index]}}" style="width:160rpx;height:160rpx;"bindtap='clickimage' data-index="{{index}}" bindlongpress="deleteImage"></image>
+      </block>
+  </block>
+
+  </view>
+ </view>
+</view>
+ <!-- 第四层 -->
+<view class="button_view">
+  <button class="upload_button" bindtap='formSubmit'>发     布</button>
+</view>

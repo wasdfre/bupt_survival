@@ -1,0 +1,48 @@
+<!--logs.wxml-->
+<view class="top-tab flex-wrp flex-tab">
+  <view class="toptab flex-item {{currentNavtab==idx ? 'active' : ''}}" wx:for="{{navTab}}" wx:for-index="idx" wx:for-item="itemName" data-idx="{{idx}}" bindtap="switchTab">
+    {{itemName}}
+  </view>
+</view>
+<scroll-view scroll-y="true" class="container notify withtab" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+  <view class="ctnt0" hidden="{{currentNavtab==0 ? '' : true}}">
+    <view class="unread">
+      <text>0 条未读</text>
+      <image src="../../images/allread.png"></image>
+    </view>
+  <view wx:for="{{discussList.length}}" wx:key="key" wx:index="index" ><!--循环生成body-->
+    <view class="notify-item flex-wrp">
+      <view class="avatar flex-item">
+        <image src='{{discussList[index].postHeadUrl}}'></image>
+      </view>
+      <view class="notify-content flex-item">
+        <!-- <block wx:if="True"> -->
+          <text class="notify-source">{{discussList[index].postUserName}}  回答了问题</text>
+          <text class="notify-title">{{discussList[index].postContext}}</text>
+        <!-- </block> -->
+      </view>
+    </view>
+  </view>
+</view>
+<view class="ctnt0" hidden="{{currentNavtab==1 ? '' : true}}">
+     <!-- <view class="unread">
+      <text>0 条未读</text>
+      <image src="../../images/allread.png"></image>
+    </view> -->
+  <view wx:for="{{upList.length}}" wx:key="key" wx:index="index" ><!--循环生成body-->
+    <view class="notify-item flex-wrp">
+      <view class="avatar flex-item">
+        <image src='{{upList[index].headUrl}}'></image>
+      </view>
+      <view class="notify-content flex-item">
+        <!-- <block wx:if="True"> -->
+          <text class="notify-source">{{upList[index].userName}}  点赞了我的问题</text>
+          <text class="notify-title">{{discussList[index].postContext}}</text>
+        <!-- </block> -->
+ 
+    </view>     </view>
+    </view>
+</view>
+
+
+</scroll-view>

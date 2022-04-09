@@ -6,7 +6,6 @@ Page({
   data: {
     index: 0,
     number: 1,
-   // array: ["日常", "学习", "情感", "寻物", "出售"],
     PostType:'',
     avatarUrl: '../../images/user-unlogin.png',
     user_openid: app.globalData.openid,
@@ -166,7 +165,7 @@ Page({
             success: function () {
               console.log(res)
               wx.switchTab({
-                url: '../Main_page/Main_page',
+                url: '../discovery/discovery',
               })
             }
           })
@@ -219,7 +218,7 @@ Page({
     //   "_id": cccc.exists(true)
     // })
     // .remove().then(res => { 
-    //   console.log("1wddw1",res);
+    //   console.log("delet yes",res);
     // })
   }
 

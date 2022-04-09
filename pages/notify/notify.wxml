@@ -24,6 +24,7 @@
     </view>
   </view>
 </view>
+
 <view class="ctnt0" hidden="{{currentNavtab==1 ? '' : true}}">
      <!-- <view class="unread">
       <text>0 条未读</text>
@@ -37,7 +38,7 @@
       <view class="notify-content flex-item">
         <!-- <block wx:if="True"> -->
           <text class="notify-source">{{upList[index].userName}}  点赞了我的问题</text>
-          <text class="notify-title">{{discussList[index].postContext}}</text>
+          <text class="notify-title">{{upList[index].context}}</text>
         <!-- </block> -->
  
     </view>     </view>

@@ -11,10 +11,14 @@ Page({
     discussList:[],
     upList: []
   },
-  onLoad: function () {
+  onShow:function () {
     this.discussMe()
     this.searchAssistantUp()
   },
+  // onLoad: function () {
+  //   this.discussMe()
+  //   this.searchAssistantUp()
+  // },
   switchTab: function(e){
     this.setData({
       currentNavtab: e.currentTarget.dataset.idx
@@ -26,13 +30,15 @@ discussMe: function () {
   this.setData({
     discussList: []
   })
+  //openid获取方式修改
+  console.log("1111fr",app.globalData.openid)
   db.collection('My_ReplyData').where({ //别人评论我
-    PostUserId: myOpenId
+    PostUserId: app.globalData.openid
   }).get
   ({
     success: res => 
     {
-      // console.log("1111",res.data)
+      console.log("1111ffr",res.data.length)
 
       for (let i = 0; i < res.data.length; i++) 
       {
@@ -83,7 +89,7 @@ discussMe: function () {
             ({
               [postContext]: res.data[0].Question,
             })
-            // console.log(122121,res.data[0])
+            // console.log(122121,res.data)
           }
         })
       } 
@@ -99,10 +105,10 @@ searchAssistantUp: function ()
     upList: []
   })
   db.collection('Assistant_Up').where({ //点赞列表有自己说明有人点赞
-    Up_id: myOpenId
+    Up_id: app.globalData.openid
   }).get({
     success: res => {
-      
+      console.log(2233,res.data.length)
       for (var j = 0; j < res.data.length; j++) {
 
         let index = res.data.length - j - 1
@@ -129,7 +135,8 @@ searchAssistantUp: function ()
             that.setData({
               [context]: res.data[0].Question
             })
-            console.log(23333,res.data[0].Question)
+            console.log(sss,res.data[0].Question)
+            // console.log
           }
         })
         db.collection('Assistant_User').where({

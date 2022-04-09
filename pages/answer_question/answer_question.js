@@ -100,9 +100,8 @@ formSubmit: function (e)
           inputMessage: ''
         })
         //但是会叠好多层
-        wx.navigateTo({
+        wx.navigateBack({
           url: '../question/question',
-        
         })
       }
     })

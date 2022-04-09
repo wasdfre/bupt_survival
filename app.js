@@ -33,8 +33,8 @@ App({
       })
     }
   },
-  globalData: {
-    userInfo: null,
+  globalData:{
+    userInfo:null,
     entry_url: null,
     DEFAULT_ONLINE_URL: "https://sherlockshemol.github.io"
   }

@@ -33,6 +33,10 @@ Page({
   //使用用户id作用用户标识，使用问题id作为问题标识
   //逻辑就是查找用户的，查找自己的
   //一加载
+  onShow:function()
+  {
+    this.get_DBinf()
+  },
   onLoad: function () 
   {
     //获取正在使用的用户信息

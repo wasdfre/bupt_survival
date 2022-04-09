@@ -7,15 +7,16 @@
     "pages/Mine_Reply/Mine_Reply",
     "pages/notify/notify",
     "pages/more/more",
-    "pages/Login/Login",
+    "pages/Login/Login",  
     "pages/First_page/First_page",
     "pages/answer/answer",
     "pages/web_disp/web_disp"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0068C4",
-    "navigationBarTitleText": "北邮生存指南",
+    "navigationBarTitleText": "知乎",
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true
   },
@@ -34,26 +35,27 @@
       {
         "pagePath": "pages/index/index",
         "text": "",
-        "iconPath": "images/write1.png",
-        "selectedIconPath": "images/write2.png"
+        "iconPath": "images/index.png",
+        "selectedIconPath": "images/index_focus.png"
       },
       {
         "pagePath": "pages/discovery/discovery",
         "text": "",
-        "iconPath": "images/ques1.png",
-        "selectedIconPath": "images/ques2.png"
+        "iconPath": "images/discovery.png",
+        "selectedIconPath": "images/discovery_focus.png"
       },
       {
         "pagePath": "pages/notify/notify",
         "text": "",
-        "iconPath": "images/alarm1.png",
-        "selectedIconPath": "images/alarm2.png"
+        "iconPath": "images/ring.png",
+        "selectedIconPath": "images/ring_focus.png"
       },
+    
       {
         "pagePath": "pages/more/more",
         "text": "",
-        "iconPath": "images/bur1.png",
-        "selectedIconPath": "images/bur2.png"
+        "iconPath": "images/burger.png",
+        "selectedIconPath": "images/burger_focus.png"
       }
     ]
   },
@@ -62,6 +64,5 @@
     "downloadFile": 10000
   },
   "debug": true,
-  "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "sitemapLocation": "sitemap.json"
 }

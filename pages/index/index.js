@@ -188,7 +188,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (options) 
+  {
     
     var that = this
     wx.getStorage({
@@ -210,6 +211,22 @@ Page({
         })
       }
     })
-  },
+    
+    // const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
+    // const cccc= db.command
+    // return db.collection('Assistant_Up').where
+    // ({
+    //   "_id": cccc.exists(true)
+    // })
+    // .remove().then(res => { 
+    //   console.log("1wddw1",res);
+    // })
+  }
 
 })
+// return await db.collection('todos').where({
+//   done: true
+// }).remove()
+// } catch(e) {
+// console.error(e)
+// }

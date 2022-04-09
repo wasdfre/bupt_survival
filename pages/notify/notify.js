@@ -32,7 +32,7 @@ discussMe: function () {
   ({
     success: res => 
     {
-      console.log("1111",res.data)
+      // console.log("1111",res.data)
 
       for (let i = 0; i < res.data.length; i++) 
       {
@@ -81,8 +81,9 @@ discussMe: function () {
             var postContext = 'discussList[' + index + '].postContext';
             that.setData
             ({
-              [postContext]: res.data[0].Context,
+              [postContext]: res.data[0].Question,
             })
+            // console.log(122121,res.data[0])
           }
         })
       } 
@@ -101,6 +102,7 @@ searchAssistantUp: function ()
     Up_id: myOpenId
   }).get({
     success: res => {
+      
       for (var j = 0; j < res.data.length; j++) {
 
         let index = res.data.length - j - 1
@@ -125,8 +127,9 @@ searchAssistantUp: function ()
           success: res => {
             var context = 'upList[' + index + '].context';//获取帖子内容
             that.setData({
-              [context]: res.data[0].Context
+              [context]: res.data[0].Question
             })
+            console.log(23333,res.data[0].Question)
           }
         })
         db.collection('Assistant_User').where({

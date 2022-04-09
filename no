@@ -1,0 +1,12 @@
+  dsfwfw[m
+  main[m
+  master[m
+  new1[m
+* [32m呢哇[m
+  [31mremotes/origin/HEAD[m -> origin/main
+  [31mremotes/origin/dsfwfw[m
+  [31mremotes/origin/main[m
+  [31mremotes/origin/master[m
+  [31mremotes/origin/new[m
+  [31mremotes/origin/new1[m
+  [31mremotes/origin/呢哇[m

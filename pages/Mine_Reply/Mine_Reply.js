@@ -26,71 +26,71 @@ Page({
     })
   },
 
-  navbarTap: function (e) {
-    this.setData({
-      currentTab: e.currentTarget.dataset.idx
-    })
-    if (e.currentTarget.dataset.idx == 0) { this.get_DBinf(); }
-    else { this.get_Sell_DBinf(); }
-  },
+  // navbarTap: function (e) {
+  //   this.setData({
+  //     currentTab: e.currentTarget.dataset.idx
+  //   })
+  //   if (e.currentTarget.dataset.idx == 0) { this.get_DBinf(); }
+  //   else { this.get_Sell_DBinf(); }
+  // },
 
   onLoad() {
     let that = this
   },
+  //除去点赞与品论
+  // upclickbutton: function (e) {
+  //   var that = this
+  //   var ind = e.currentTarget.dataset.nowindex
+  //   //console.log("Post_id:" + e.currentTarget.dataset.post_id)
+  //   const postuserid = e.currentTarget.dataset.postopenid
 
-  upclickbutton: function (e) {
-    var that = this
-    var ind = e.currentTarget.dataset.nowindex
-    //console.log("Post_id:" + e.currentTarget.dataset.post_id)
-    const postuserid = e.currentTarget.dataset.postopenid
+  //   //console.log(this.data.Up_array[ind] == 0)
 
-    //console.log(this.data.Up_array[ind] == 0)
+  //   if (this.data.Up_array[ind] == 0)//说明没点赞过
+  //   {
 
-    if (this.data.Up_array[ind] == 0)//说明没点赞过
-    {
-
-      var nowup = 'Up_array[' + ind + ']'//设置为点赞过
-      this.setData({
-        [nowup]: 1
-      })
-      const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
-      return db.collection('Assistant_Up').add({ //添加帖子
-        data: {
-          Up_Post_id: e.currentTarget.dataset.post_id,
-          Up_id: e.currentTarget.dataset.postopenid,
-          Time_s: Date.now()
-        }
-      }).then(res => {
-        console.log("Assistant_Up OK!");
-        console.log("Pick the post_id:" + e.currentTarget.dataset.post_id);
-        wx.cloud.callFunction({
-          name: 'Up_Assistant_Post',
-          data: {
-            Post_id: e.currentTarget.dataset.post_id,
-          },
-          success: function (res) {
-            console.log("Up_Assistant_Post OK!");
-            that.get_DBinf()
-            wx.showToast({
-              title: '已点赞',
-              image: '../../images/Up_heart.png',
-              duration: 2000
-            })
-          },
-          fail: err => {
-            console.log('error:', err)
-          }
-        })
-      })
-    }
-    else {
-      wx.showToast({
-        title: '已点赞过',
-        image: '../../images/Up_heart2.png',
-        duration: 2000
-      })
-    }
-  },
+  //     var nowup = 'Up_array[' + ind + ']'//设置为点赞过
+  //     this.setData({
+  //       [nowup]: 1
+  //     })
+  //     const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
+  //     return db.collection('Assistant_Up').add({ //添加帖子
+  //       data: {
+  //         Up_Post_id: e.currentTarget.dataset.post_id,
+  //         Up_id: e.currentTarget.dataset.postopenid,
+  //         Time_s: Date.now()
+  //       }
+  //     }).then(res => {
+  //       console.log("Assistant_Up OK!");
+  //       console.log("Pick the post_id:" + e.currentTarget.dataset.post_id);
+  //       wx.cloud.callFunction({
+  //         name: 'Up_Assistant_Post',
+  //         data: {
+  //           Post_id: e.currentTarget.dataset.post_id,
+  //         },
+  //         success: function (res) {
+  //           console.log("Up_Assistant_Post OK!");
+  //           that.get_DBinf()
+  //           wx.showToast({
+  //             title: '已点赞',
+  //             image: '../../images/Up_heart.png',
+  //             duration: 2000
+  //           })
+  //         },
+  //         fail: err => {
+  //           console.log('error:', err)
+  //         }
+  //       })
+  //     })
+  //   }
+  //   else {
+  //     wx.showToast({
+  //       title: '已点赞过',
+  //       image: '../../images/Up_heart2.png',
+  //       duration: 2000
+  //     })
+  //   }
+  // },
 
 
   Remove_Post: function (e) {
@@ -115,6 +115,7 @@ Page({
     })
   },
 
+  //前去回答页面
   to_Reply: function (e) {
     let that = this
     console.log(e.currentTarget.dataset.post_id);//事件的id
@@ -130,7 +131,7 @@ Page({
     })
     wx.navigateTo({
 
-      url: '../Reply_page/Reply_page',
+      url: '../question/question',
       success: function (res) { console.log("我去评论页啦！") },
       fail: function (res) { console.log("诶，我怎么还在原地？") }
     })
@@ -188,6 +189,7 @@ Page({
             })
           },
         })
+        //获取帖子数据
         const get_inf_db = wx.cloud.database()//{ env: 'a123-4gjil6fj4c251504' }
         get_inf_db.collection('Assistant_DataSheet').where({
           _openid: res.data
@@ -200,6 +202,7 @@ Page({
               return item._openid
             })).then(res => {
               let _ = get_inf_db.command;
+              //根据帖子信息查找发帖人信息,这里还可以优化
               get_inf_db.collection('Assistant_User').where({
                 _openid: _.in(res)
               }).get().then(res => {
@@ -232,59 +235,4 @@ Page({
     })
 
   },
-  /*get_DBinf: function () {
-    let that = this
-    wx.getStorage({
-      key: 'User_openid',
-      success(res) {
-        that.setData({
-          UserId: res.data
-        })
-        console.log(res.data);
-        const get_inf_db = wx.cloud.database()//{ env: 'a123-4gjil6fj4c251504' }
-        get_inf_db.collection('Assistant_DataSheet').where({
-          _openid: res.data
-        }).get({
-          success: res => {
-            that.setData({
-              DataPost_arry: res.data
-            })
-            Promise.all(res.data.map((item) => {
-              return item._openid
-            })).then(res => {
-              let _ = get_inf_db.command;
-              get_inf_db.collection('Assistant_User').where({
-                _openid: _.in(res)
-              }).get().then(res => {
-                that.data.Username_arry = [];
-                that.data.User_head_url_arry = [];
-                for (let i = 0; i < that.data.DataPost_arry.length; i++) {
-                  let openId = that.data.DataPost_arry[i]._openid;
-                  for (let j = 0; j < res.data.length; j++) {
-                    if (openId == res.data[j]._openid) {
-                      that.data.Username_arry.push(res.data[j].Username);
-                      that.data.User_head_url_arry.push(res.data[j].User_head_url);
-                    }
-                  }
-                }
-                that.setData({
-                  Username_arry: that.data.Username_arry,
-                  User_head_url_arry: that.data.User_head_url_arry
-                });
-              })
-
-            }).catch((ex) => {
-              console.log(ex);
-            })
-
-          }
-        })
-
-
-
-      },
-
-    })
-
-  },*/
 })

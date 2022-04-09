@@ -8,7 +8,8 @@
           <view class='time'><label class='lb_time'>{{DataPost_arry[index].Time}}</label></view>
         </view>
         <view class='hidden_second'>
-          <label class='lb_tx'>{{DataPost_arry[index].Context}}</label>
+          <label class='lb_tx'>{{DataPost_arry[index].Question}}</label>
+          <label class='lb_tx'>{{DataPost_arry[index].Questiondes}}</label>
         </view>
         <view class='hidden_third'>
          <image wx:for="{{DataPost_arry[index].Photo_arr}}" wx:key='Photo_arr' wx:for-item="url" src='{{url}}' bindtap="previewImage" data-myimg='{{url}}' ></image>
@@ -23,13 +24,7 @@
           </block>
 
 
-          <block wx:if="{{Up_array[index]==0}}">
-          <view class='b_2' bindtap='upclickbutton' data-post_id="{{DataPost_arry[index]._id}}" data-postopenid="{{DataPost_arry[index]._openid}}" data-nowIndex="{{index}}"><image src='/images/dz.png'></image></view>
-          </block>
-
-          <block wx:else>
-           <view class='b_2' bindtap='upclickbutton' data-post_id="{{DataPost_arry[index]._id}}" data-postopenid="{{DataPost_arry[index]._openid}}" data-nowIndex="{{index}}"><image src='/images/Up_heart.png'></image></view>
-          </block>
+     
 
           <view class='b_3'><label>{{DataPost_arry[index].Up_Record_num}}</label></view>
           <view class='b_4' bindtap='to_Reply' data-post_id="{{DataPost_arry[index]._id}}" data-postopenid="{{DataPost_arry[index]._openid}}" data-nowIndex="{{index}}"><image src='/images/Reply.png'></image></view>

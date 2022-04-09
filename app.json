@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/Mine_Reply/Mine_Reply",
     "pages/notify/notify",
     "pages/First_page/First_page",
     "pages/index/index",
     "pages/discovery/discovery",
     "pages/question/question",
     "pages/answer_question/answer_question",
-    "pages/Mine_Reply/Mine_Reply",
+    
     
     "pages/more/more",
     "pages/Login/Login",  

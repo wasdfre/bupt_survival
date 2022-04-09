@@ -81,9 +81,9 @@ formSubmit: function (e)
       //  console.log("deqwfwefw",res.result)
       }
     })
-
-    db.collection('My_ReplyData').add
-    ({
+    //return 作用
+    return db.collection('My_ReplyData').add
+    ({ 
       data: 
       {
         context: that.data.inputMessage,
@@ -93,22 +93,78 @@ formSubmit: function (e)
         PageId: that.data.PageId,
         PostUserId: that.data.PostUserId,
         PageTime: that.data.Time
-      }, success: function (res) 
-      {
-        that.setData
-        ({
-          inputMessage: ''
-        })
-        //但是会叠好多层
-        wx.navigateBack({
-          url: '../question/question',
-        })
       }
+    }).then(res => {
+      console.log(1213232,that.data.PageId);
+      //增加帖子数
+      wx.cloud.callFunction({
+        name: 'Reply_post',
+        data: {
+          PageId: that.data.PageId,
+        },
+        success: function (res) {
+          console.log("Reply_post OK!");
+        },
+        fail: err => {
+          console.log('error:', err)
+        }
+      })
     })
   },
+  //   const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
+  //   return db.collection('My_ReplyData').add
+  //   ({
+  //     data: 
+  //     {
+  //       context: that.data.inputMessage,
+  //       image: that.data.HeadImageUrl,
+  //       time: that.data.SendTime,
+  //       name: that.data.UserName,
+  //       PageId: that.data.PageId,
+  //       PostUserId: that.data.PostUserId,
+  //       PageTime: that.data.Time
+  //     }, success: function (res) 
+  //     {
+  //       that.setData
+  //       ({
+  //         inputMessage: ''
+  //       })
+  //     }
+  //   }).then(res=>
+  //   {
+  //     wx.cloud.callFunction
+  //     ({
+  //       name: 'Reply_post',
+  //       data: 
+  //       {
+  //         Post_id: e.currentTarget.dataset.post_id,
+  //       },
+  //       success: function (res) 
+  //       {
+  //         console.log("Reply_post OK!");
+  //       },
+  //       fail: err => 
+  //       {
+  //         console.log('error:', err)
+  //       }
+  //     })
+  //   })
+  //     //但是会叠好多层
+  //   wx.navigateBack
+  //   ({
+  //     url: '../question/question',
+  //   })
+  // },
   /**
    * 生命周期函数--监听页面加载
    */
+  //  success: function (res) 
+  //  {
+  //    that.setData
+  //    ({
+  //      inputMessage: ''
+  //    })
+  //  }
   onLoad: function (options)
   {
     var that = this;

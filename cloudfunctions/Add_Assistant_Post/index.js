@@ -18,7 +18,6 @@ exports.main = async (event, context) => {
       Up_Post_id: youopenid,//记录点赞的贴子id
       Up_id: postopenid,//记录点赞的贴子所属人openid
       Time: Time_s
-
     },
   }).then(res => {
     console.log("updatevote out")

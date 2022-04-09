@@ -144,8 +144,10 @@ Page({
       // })
       //添加点赞信息
       const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
-      return db.collection('Assistant_Up').add({ 
-        data: {
+      return db.collection('Assistant_Up').add
+      ({ 
+        data: 
+        {
           Up_Post_id:e.currentTarget.dataset.post_id,
           Up_id: e.currentTarget.dataset.postopenid,
           Time_s: Date.now()

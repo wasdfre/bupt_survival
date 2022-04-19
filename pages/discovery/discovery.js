@@ -1,5 +1,12 @@
 //discovery.js
+const app = getApp()
 var util = require('../../utils/util.js')
+const db = wx.cloud.database()//初始化数据库 宏定义一个db指代
+const _ = db.command;//Assistant_DataSheet表
+var data = {
+  //云开发环境id
+  env: 'a123-4gjil6fj4c251504'
+  }
 Page({
   data: {
     navTab: ["最新", "热门",],      //切换类别
@@ -32,6 +39,8 @@ Page({
   //一载入页面
   onLoad: function () 
   {
+    this.gethis();
+    this.getnew();
     //获取正在使用的用户信息
     wx.getStorage
     ({
@@ -103,6 +112,137 @@ Page({
      })
     this.refresh();
   },
+  /*
+  //获取本地记录
+  gethis() {
+    let that = this;
+    wx.getStorage({
+          key: 'history',
+          success: function(res) {
+                let hislist = JSON.parse(res.data);
+                //限制长度
+                if (hislist.length > 5) {
+                      hislist.length = 5
+                }
+                that.setData({
+                      hislist: hislist
+                })
+          },
+    })
+},
+
+//跳转详情
+detail(e) {
+  let that = this;
+  wx.navigateTo({
+        url: '/pages/detail/detail?scene=' + e.currentTarget.dataset.id,
+  })
+},
+//搜索结果
+search(n) {
+  let that = this;
+  let key = that.data.key;
+  if (key == '') {
+        wx.showToast({
+              title: '请输入关键词',
+              icon: 'none',
+        })
+        return false;
+  }
+  wx.setNavigationBarTitle({
+        title:'"'+ that.data.key + '"的搜索结果',
+  })
+  wx.showLoading({
+        title: '加载中',
+  })
+  if (n !== 'his') {
+        that.history(key);
+  }
+  db.collection('publish').where({
+        status: 0,
+        dura: _.gt(new Date().getTime()),
+        key: db.RegExp({
+              regexp: '.*' + key + '.*',
+              options: 'i',
+        })
+  }).orderBy('creat', 'desc').limit(20).get({
+        success(e) {
+              wx.hideLoading();
+              that.setData({
+                    blank: true,
+                    page: 0,
+                    list: e.data,
+                    nomore: false,
+              })
+        }
+  })
+},
+onReachBottom() {
+  this.more();
+},
+keyInput(e) {
+  this.data.key = e.detail.value
+},
+//至顶
+gotop() {
+  wx.pageScrollTo({
+        scrollTop: 0
+  })
+},
+//监测屏幕滚动
+onPageScroll: function (e) {
+  this.setData({
+        scrollTop: parseInt((e.scrollTop) * wx.getSystemInfoSync().pixelRatio)
+  })
+},
+//加载更多
+more() {
+  let that = this;
+  if (that.data.nomore || that.data.list.length < 20) {
+        return false
+  }
+  let page = that.data.page + 1;
+  if (that.data.collegeCur == -2) {
+        var collegeid = _.neq(-2); //除-2之外所有
+  } else {
+        var collegeid = that.data.collegeCur + '' //小程序搜索必须对应格式
+  }
+  db.collection('publish').where({
+        status: 0,
+        dura: _.gt(new Date().getTime()),
+        key: db.RegExp({
+              regexp: '.*' + that.data.key + '.*',
+              options: 'i',
+        })
+  }).orderBy('creat', 'desc').skip(page * 20).limit(20).get({
+        success: function (res) {
+              if (res.data.length == 0) {
+                    that.setData({
+                          nomore: true
+                    })
+                    return false;
+              }
+              if (res.data.length < 20) {
+                    that.setData({
+                          nomore: true
+                    })
+              }
+              that.setData({
+                    page: page,
+                    list: that.data.list.concat(res.data)
+              })
+        },
+        fail() {
+              wx.showToast({
+                    title: '获取失败',
+                    icon: 'none'
+              })
+        }
+  })
+},
+
+
+
   //切换上方选择页面的函数
   switchTab: function(e)
   {
@@ -131,9 +271,12 @@ Page({
       url: '../question/question'
     })
   },
-
-  
-  //下面的暂时不管
+  search_content(event){
+    console.log("搜索内容：", event.detail.value)    //这里可以让我们在开发的时候在console控制台上看到我们的结果
+    Rname1 = event.detail.value //这里的Rname1 也是需要在前面进行宏定义的格式为（ let Rname1 = "" ） ，然后给它赋值
+  },
+  */
+  //搜索框
   upper: function () {
     wx.showNavigationBarLoading()
     this.refresh();
@@ -146,8 +289,11 @@ Page({
     setTimeout(function(){wx.hideNavigationBarLoading();that.nextLoad();}, 1000);
     console.log("lower")
   },
+  //scroll: function (e) {
+  //  console.log("scroll")
+  //},
 
-  //网络请求数据, 实现刷新
+  //网络请求数据, 实现首页刷新
   refresh0: function(){
     var index_api = '';
     util.getData(index_api)
@@ -160,8 +306,8 @@ Page({
   },
 
   //使用本地 fake 数据实现刷新效果
-  refresh: function(){
-    var feed = util.getDiscovery();
+  getData: function(){
+    var feed = util.getData2();
     console.log("loaddata");
     var feed_data = feed.data;
     this.setData({
@@ -169,15 +315,51 @@ Page({
       feed_length: feed_data.length
     });
   },
+  refresh: function(){
+    wx.showToast({
+      title: '刷新中',
+      icon: 'loading',
+      duration: 3000
+    });
+    var feed = util.getData2();
+    console.log("loaddata");
+    var feed_data = feed.data;
+    this.setData({
+      feed:feed_data,
+      feed_length: feed_data.length
+    });
+    setTimeout(function(){
+      wx.showToast({
+        title: '刷新成功',
+        icon: 'success',
+        duration: 2000
+      })
+    },3000)
+
+  },
 
   // 使用本地 fake 数据实现继续加载效果
   nextLoad: function(){
-    var next = util.discoveryNext();
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 4000
+    })
+    var next = util.getNext();
     console.log("continueload");
     var next_data = next.data;
     this.setData({
       feed: this.data.feed.concat(next_data),
       feed_length: this.data.feed_length + next_data.length
     });
+    setTimeout(function(){
+      wx.showToast({
+        title: '加载成功',
+        icon: 'success',
+        duration: 2000
+      })
+    },3000)
   }
-});
+
+
+})

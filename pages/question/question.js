@@ -5,7 +5,7 @@ var app = getApp()
 const db = wx.cloud.database();
 Page({
   data: {
-    motto: '知乎--微信小程序版',//上方标题
+    motto: '提问',//上方标题
     discussShow: false,//不管这个
     // inputMessage: '',
     // SendTime: '',

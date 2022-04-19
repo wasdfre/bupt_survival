@@ -42,27 +42,34 @@ Page({
     const get_inf_db = wx.cloud.database()
     get_inf_db.collection('Assistant_DataSheet').get
     ({
-      console.log(1111,res)
       success: res => 
       {
+        console.log(1111,res)
         that.setData
         ({
           DataPostArry: res.data//获取全部数据
         })
-        console.log(res)
+        
         //异步promise对象，不用管
-        Promise.all(res.data.map((item)=>{})).then
+        //map，每个对象调用一个函数，item赋为空值
+        Promise.all(res.data.map((item)=>item["_openid"])).then
         (
           res=>
           {
+            //这里是_定
             let _ = get_inf_db.command;
+            // console.log('dadwadaw',res.data.map((item)=>item[key]))
             //根据所有用户的openid获取用户数据，在数据库Assistant_User
+            console.log("头像ers",res)
             get_inf_db.collection('Assistant_User').where
             ({
-              _openid: _.in(res)//在res中的openid
+              // _openid: "oSe9A5dvjrhoLCUz4pAKmN9487PY"
+              _openid:_.in(res)
+              // _.in(res)//在res中的openid
             }).get().then
             (res => 
               {
+                console.log("头像",res)
                 that.data.UsernameArry = [];//用户名
                 that.data.UserHeadurlArry=[];//头像
                 for (let i = 0; i < this.data.DataPostArry.length;i++)
@@ -83,12 +90,14 @@ Page({
                   UsernameArry: that.data.UsernameArry,
                   UserHeadurlArry: that.data.UserHeadurlArry
                 });
+                // console.log("头像",that.data.UsernameArry)
               }
             )
           }).catch((ex)=>
           {
             console.log(ex);
-          })
+          }
+        )  
 
        }
      })
@@ -151,24 +160,24 @@ Page({
   },
 
   //使用本地 fake 数据实现刷新效果
-  // refresh: function(){
-  //   var feed = util.getDiscovery();
-  //   console.log("loaddata");
-  //   var feed_data = feed.data;
-  //   this.setData({
-  //     feed:feed_data,
-  //     feed_length: feed_data.length
-  //   });
-  // },
+  refresh: function(){
+    var feed = util.getDiscovery();
+    console.log("loaddata");
+    var feed_data = feed.data;
+    this.setData({
+      feed:feed_data,
+      feed_length: feed_data.length
+    });
+  },
 
-  //使用本地 fake 数据实现继续加载效果
-  // nextLoad: function(){
-  //   var next = util.discoveryNext();
-  //   console.log("continueload");
-  //   var next_data = next.data;
-  //   this.setData({
-  //     feed: this.data.feed.concat(next_data),
-  //     feed_length: this.data.feed_length + next_data.length
-  //   });
-  // }
+  // 使用本地 fake 数据实现继续加载效果
+  nextLoad: function(){
+    var next = util.discoveryNext();
+    console.log("continueload");
+    var next_data = next.data;
+    this.setData({
+      feed: this.data.feed.concat(next_data),
+      feed_length: this.data.feed_length + next_data.length
+    });
+  }
 });

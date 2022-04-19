@@ -211,15 +211,17 @@ Page({
       }
     })
     
-    // const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
-    // const cccc= db.command
-    // return db.collection('Assistant_Up').where
-    // ({
-    //   "_id": cccc.exists(true)
-    // })
-    // .remove().then(res => { 
-    //   console.log("delet yes",res);
-    // })
+    const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
+    const cccc= db.command
+    // My_ReplyData
+    // Assistant_Up
+    return db.collection('My_ReplyData').where
+    ({
+      "_id": cccc.exists(true)
+    })
+    .remove().then(res => { 
+      console.log("delet yes",res);
+    })
   }
 
 })

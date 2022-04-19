@@ -42,6 +42,7 @@ Page({
     const get_inf_db = wx.cloud.database()
     get_inf_db.collection('Assistant_DataSheet').get
     ({
+      console.log(1111,res)
       success: res => 
       {
         that.setData
@@ -150,24 +151,24 @@ Page({
   },
 
   //使用本地 fake 数据实现刷新效果
-  refresh: function(){
-    var feed = util.getDiscovery();
-    console.log("loaddata");
-    var feed_data = feed.data;
-    this.setData({
-      feed:feed_data,
-      feed_length: feed_data.length
-    });
-  },
+  // refresh: function(){
+  //   var feed = util.getDiscovery();
+  //   console.log("loaddata");
+  //   var feed_data = feed.data;
+  //   this.setData({
+  //     feed:feed_data,
+  //     feed_length: feed_data.length
+  //   });
+  // },
 
   //使用本地 fake 数据实现继续加载效果
-  nextLoad: function(){
-    var next = util.discoveryNext();
-    console.log("continueload");
-    var next_data = next.data;
-    this.setData({
-      feed: this.data.feed.concat(next_data),
-      feed_length: this.data.feed_length + next_data.length
-    });
-  }
+  // nextLoad: function(){
+  //   var next = util.discoveryNext();
+  //   console.log("continueload");
+  //   var next_data = next.data;
+  //   this.setData({
+  //     feed: this.data.feed.concat(next_data),
+  //     feed_length: this.data.feed_length + next_data.length
+  //   });
+  // }
 });

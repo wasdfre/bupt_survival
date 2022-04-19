@@ -108,7 +108,7 @@ searchAssistantUp: function ()
     Up_id: app.globalData.openid
   }).get({
     success: res => {
-      console.log(2233,res.data.length)
+      // console.log(2233,res.data)
       for (var j = 0; j < res.data.length; j++) {
 
         let index = res.data.length - j - 1
@@ -131,6 +131,7 @@ searchAssistantUp: function ()
           _id: res.data[index].Up_Post_id
         }).get({
           success: res => {
+            console.log(2233,res)
             var context = 'upList[' + index + '].context';//获取帖子内容
             that.setData({
               [context]: res.data[0].Question

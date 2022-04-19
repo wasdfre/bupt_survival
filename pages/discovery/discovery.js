@@ -53,24 +53,32 @@ Page({
     ({
       success: res => 
       {
+        console.log(1111,res)
         that.setData
         ({
           DataPostArry: res.data//获取全部数据
         })
-        console.log(res)
+        
         //异步promise对象，不用管
-        Promise.all(res.data.map((item)=>{})).then
+        //map，每个对象调用一个函数，item赋为空值
+        Promise.all(res.data.map((item)=>item["_openid"])).then
         (
           res=>
           {
+            //这里是_定
             let _ = get_inf_db.command;
+            // console.log('dadwadaw',res.data.map((item)=>item[key]))
             //根据所有用户的openid获取用户数据，在数据库Assistant_User
+            console.log("头像ers",res)
             get_inf_db.collection('Assistant_User').where
             ({
-              _openid: _.in(res)//在res中的openid
+              // _openid: "oSe9A5dvjrhoLCUz4pAKmN9487PY"
+              _openid:_.in(res)
+              // _.in(res)//在res中的openid
             }).get().then
             (res => 
               {
+                console.log("头像",res)
                 that.data.UsernameArry = [];//用户名
                 that.data.UserHeadurlArry=[];//头像
                 for (let i = 0; i < this.data.DataPostArry.length;i++)
@@ -91,12 +99,14 @@ Page({
                   UsernameArry: that.data.UsernameArry,
                   UserHeadurlArry: that.data.UserHeadurlArry
                 });
+                // console.log("头像",that.data.UsernameArry)
               }
             )
           }).catch((ex)=>
           {
             console.log(ex);
-          })
+          }
+        )  
 
        }
      })
@@ -328,7 +338,7 @@ more() {
 
   },
 
-  //使用本地 fake 数据实现继续加载效果
+  // 使用本地 fake 数据实现继续加载效果
   nextLoad: function(){
     wx.showToast({
       title: '加载中',

@@ -213,7 +213,9 @@ Page({
     
     // const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
     // const cccc= db.command
-    // return db.collection('Assistant_Up').where
+    // // My_ReplyData
+    // // Assistant_Up
+    // return db.collection('Assistant_User').where
     // ({
     //   "_id": cccc.exists(true)
     // })

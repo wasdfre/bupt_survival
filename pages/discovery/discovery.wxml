@@ -1,103 +1,115 @@
+<scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+
 
 <!-- 顶部选择栏 -->
-<view class="top-tab flex-wrp flex-tab " >
-  <view class="toptab flex-item {{currentNavtab==idx ? 'active' : ''}}" wx:for="{{navTab}}" wx:for-index="idx" wx:for-item="itemName" data-idx="{{idx}}" bindtap="switchTab">
-    {{itemName}}
+  <view class="top-tab flex-wrp flex-tab " >
+    <view class="toptab flex-item {{currentNavtab==idx ? 'active' : ''}}" wx:for="{{navTab}}" wx:for-index="idx" wx:for-item="itemName" data-idx="{{idx}}" bindtap="switchTab">
+      {{itemName}}
+    </view>
   </view>
-</view>
 
-<scroll-view scroll-y="true" class="container discovery withtab" bindscrolltoupper="upper" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-  <!-- 当页面选择0时 -->
-  <view class="ctnt0" hidden="{{currentNavtab==0 ? '' : true}}">
-    <!-- 轮播图 -->
-    <swiper class="activity" indicator-dots="{{indicatorDots}}"
-            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{imgUrls}}">
-        <swiper-item>
-          <image src="{{item}}" class="slide-image" width="355" height="155"/>
-        </swiper-item>
-      </block>
-    </swiper>
-    <!-- 问题循环 -->
-       <!-- <block wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' class = 'item-contain' > -->
-    <view wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' >
-      <view class="feed-item">
-          <view class="feed-source">
-                <!-- <a class=""> -->
-                  <view class="avatar">
-                      <image src="{{UserHeadurlArry[index]}}"></image>
-                  </view>
-                  <text c>{{item.feed_source_name}}{{UsernameArry[index]}}</text>
-                <!-- </a> -->
-                <!-- 更多图标 -->
-                <!-- <image class="item-more" mode="aspectFit" src="../../images/more.png"></image> -->
-          </view>
-          <view class="feed-content">
-              <!-- 问题部分 -->
-              <view class="question" qid="{{question_id}}" bindtap="bindQueTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
-                  <a>
-                      <!-- 使用text的字体 -->
-                      <text  class="question-link">{{DataPostArry[index].Question}}</text>
-                  </a>
-              </view>
-              <!-- 回答部分 -->
-              <view class="answer-body">
-                  <view bindtap="bindItemTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
-                      <text class="answer-txt" aid="{{answer_id}}">{{DataPostArry[index].Questiondes}}</text>
-                  </view>
-                  <view class="answer-actions" bindtap="bindItemTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
-                    <view class="like dot">
-                          <a>{{DataPostArry[index].Up_Record_num}} 赞同 </a>
-                    </view>
-                    <view class="comments dot">
-                          <a>{{DataPostArry[index].Reply_Record_num}} 评论 </a>
-                    </view>
-                    <view class="follow-it">
-                          <a>关注问题</a>
-                    </view>
-                  </view>
-                </view>
-            </view>
-        </view>
-    </view> 
-    <!-- </block> -->
+  <scroll-view scroll-y="true" class="container discovery withtab" bindscrolltoupper="upper" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <view class="search flex-wrp">
+      <view class="search-left flex-item">
+          <image src="../../images/search.png"></image>
+          <!-- 搜索栏 -->
+          <input placeholder="搜索话题或问题" placeholder-class="search-placeholder"bindinput="keyInput" bindconfirm="search"/>
+      </view>
+      
   </view>
-  <view class="ctnt1 placehold" hidden="{{currentNavtab==1 ? '' : true}}">
-    <view wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' >
+    <!-- 当页面选择0时 -->
+    <view class="ctnt0" hidden="{{currentNavtab==0 ? '' : true}}">
+      <!-- 轮播图 -->
+      <swiper class="activity" indicator-dots="{{indicatorDots}}"
+              autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{imgUrls}}">
+          <swiper-item>
+            <image src="{{item}}" class="slide-image" width="355" height="155"/>
+          </swiper-item>
+        </block>
+      </swiper>
+      <!-- 问题循环 -->
+        <!-- <block wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' class = 'item-contain' > -->
+      <view wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' >
         <view class="feed-item">
             <view class="feed-source">
-                <!-- <a class=""> -->
+                  <!-- <a class=""> -->
                     <view class="avatar">
                         <image src="{{UserHeadurlArry[index]}}"></image>
                     </view>
                     <text c>{{item.feed_source_name}}{{UsernameArry[index]}}</text>
+                  <!-- </a> -->
+                  <!-- 更多图标 -->
+                  <!-- <image class="item-more" mode="aspectFit" src="../../images/more.png"></image> -->
             </view>
             <view class="feed-content">
                 <!-- 问题部分 -->
                 <view class="question" qid="{{question_id}}" bindtap="bindQueTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
                     <a>
+                        <!-- 使用text的字体 -->
                         <text  class="question-link">{{DataPostArry[index].Question}}</text>
                     </a>
                 </view>
-                <!-- 问题描述部分 -->
+                <!-- 回答部分 -->
                 <view class="answer-body">
                     <view bindtap="bindItemTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
                         <text class="answer-txt" aid="{{answer_id}}">{{DataPostArry[index].Questiondes}}</text>
                     </view>
                     <view class="answer-actions" bindtap="bindItemTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
-                        <view class="like dot">
+                      <view class="like dot">
                             <a>{{DataPostArry[index].Up_Record_num}} 赞同 </a>
-                        </view>
-                        <view class="comments dot">
+                      </view>
+                      <view class="comments dot">
                             <a>{{DataPostArry[index].Reply_Record_num}} 评论 </a>
-                        </view>
-                        <view class="follow-it">
+                      </view>
+                      <view class="follow-it">
                             <a>关注问题</a>
-                        </view>
+                      </view>
                     </view>
-                </view>
-            </view>
-        </view>
+                  </view>
+              </view>
+          </view>
+      </view> 
+
+      <!-- </block> -->
     </view>
-  </view>->
+    <view class="ctnt1 placehold" hidden="{{currentNavtab==1 ? '' : true}}">
+      <view wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' >
+          <view class="feed-item">
+              <view class="feed-source">
+                  <!-- <a class=""> -->
+                      <view class="avatar">
+                          <image src="{{UserHeadurlArry[index]}}"></image>
+                      </view>
+                      <text c>{{item.feed_source_name}}{{UsernameArry[index]}}</text>
+              </view>
+              <view class="feed-content">
+                  <!-- 问题部分 -->
+                  <view class="question" qid="{{question_id}}" bindtap="bindQueTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                      <a>
+                          <text  class="question-link">{{DataPostArry[index].Question}}</text>
+                      </a>
+                  </view>
+                  <!-- 问题描述部分 -->
+                  <view class="answer-body">
+                      <view bindtap="bindItemTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                          <text class="answer-txt" aid="{{answer_id}}">{{DataPostArry[index].Questiondes}}</text>
+                      </view>
+                      <view class="answer-actions" bindtap="bindItemTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                          <view class="like dot">
+                              <a>{{DataPostArry[index].Up_Record_num}} 赞同 </a>
+                          </view>
+                          <view class="comments dot">
+                              <a>{{DataPostArry[index].Reply_Record_num}} 评论 </a>
+                          </view>
+                          <view class="follow-it">
+                              <a>关注问题</a>
+                          </view>
+                      </view>
+                  </view>
+              </view>
+          </view>
+      </view>
+    </view>->
+  </scroll-view>
 </scroll-view>

@@ -5,17 +5,13 @@
     "pages/notify/notify",
     "pages/First_page/First_page",
     "pages/index/index",
-    
     "pages/question/question",
     "pages/answer_question/answer_question",
-    
-    
     "pages/more/more",
-    "pages/Login/Login",  
-    
+    "pages/Login/Login",
     "pages/answer/answer",
-    "pages/web_disp/web_disp"
-    
+    "pages/web_disp/web_disp",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -54,7 +50,6 @@
         "iconPath": "images/ring.png",
         "selectedIconPath": "images/ring_focus.png"
       },
-    
       {
         "pagePath": "pages/more/more",
         "text": "",

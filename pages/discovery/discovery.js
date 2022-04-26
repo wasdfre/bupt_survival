@@ -6,7 +6,8 @@ const db = wx.cloud.database()//初始化数据库 宏定义一个db指代
 const _ = db.command;//宏定义一个_指代数据库操作符
 var data = {env: 'a123-4gjil6fj4c251504'}//云开发环境id
 Page({
-  data: {
+  data: 
+  {
     navTab: ["最新", "热门",],      //切换类别
     currentNavtab: "0",            //目前类别
     //轮播图图片列表
@@ -30,7 +31,7 @@ Page({
     replyData: []   
   },
 
-  
+
   //切换上方选择页面的函数
   switchTab: function(e)
   {
@@ -82,14 +83,14 @@ Page({
         ({
           DataPostArry: res.data
         })
-        this.get_uesrdata();
+        this.get_question_uesrdata();
       }
     })
   },
 
 
   //获取发布问题人数据
-  get_uesrdata:function()
+  get_question_uesrdata:function()
   {
     var res_temp=this.data.DataPostArry;
     console.log('dwdawdwa',res_temp)

@@ -1,14 +1,15 @@
 {
   "pages": [
     "pages/discovery/discovery",
+    "pages/First_page/First_page",
+    "pages/Login/Login",  
     "pages/Mine_Reply/Mine_Reply",
     "pages/notify/notify",
-    "pages/First_page/First_page",
+    
     "pages/index/index",
     "pages/question/question",
     "pages/answer_question/answer_question",
     "pages/more/more",
-    "pages/Login/Login",
     "pages/answer/answer",
     "pages/web_disp/web_disp",
     "pages/search/search"

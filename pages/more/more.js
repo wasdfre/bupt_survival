@@ -17,7 +17,7 @@ Page({
     })
   },
   //初始加载
-  onLoad: function () 
+  onShow: function () 
   {
     console.log('onLoad')
     var that = this
@@ -30,7 +30,7 @@ Page({
     ({
       success: res => 
       {
-        console.log(res)
+        console.log(1111,res)
         that.setData
         ({
           Username:res.data[0].Username,//姓名
@@ -58,7 +58,7 @@ Page({
     this.setData({
       replyNumber: 0
     })
-    wx.navigateTo({
+    wx.navigateBack({
       url: '../Mine_Reply/Mine_Reply',
     })
   },

@@ -104,6 +104,9 @@ formSubmit: function (e)
         },
         success: function (res) {
           console.log("Reply_post OK!");
+          wx.navigateBack({
+                url: '../question/question',
+          })
         },
         fail: err => {
           console.log('error:', err)

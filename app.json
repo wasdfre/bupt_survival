@@ -2,22 +2,16 @@
   "pages": [
     "pages/discovery/discovery",
     "pages/First_page/First_page",
-    "pages/Login/Login",  
+    "pages/Login/Login",
     "pages/Mine_Reply/Mine_Reply",
     "pages/notify/notify",
-    
     "pages/index/index",
-    
     "pages/question/question",
     "pages/answer_question/answer_question",
-    
-    
     "pages/more/more",
-   
-    
     "pages/answer/answer",
-    "pages/web_disp/web_disp"
-    
+    "pages/web_disp/web_disp",
+    "pages/feedback/feedback"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -56,7 +50,6 @@
         "iconPath": "images/ring.png",
         "selectedIconPath": "images/ring_focus.png"
       },
-    
       {
         "pagePath": "pages/more/more",
         "text": "",

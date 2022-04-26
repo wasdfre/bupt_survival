@@ -25,9 +25,9 @@
           <view class="feed-source">
                 <!-- <a class=""> -->
                   <view class="avatar">
-                      <image src="{{UserHeadurlArry[index]}}"></image>
+                      <image src="{{DataPostArry[index].UserHeadurl}}"></image>
                   </view>
-                  <text c>{{item.feed_source_name}}{{UsernameArry[index]}}</text>
+                  <text c>{{item.feed_source_name}}{{DataPostArry[index].Username}}</text>
                 <!-- </a> -->
                 <!-- 更多图标 -->
                 <!-- <image class="item-more" mode="aspectFit" src="../../images/more.png"></image> -->
@@ -68,28 +68,28 @@
             <view class="feed-source">
                 <!-- <a class=""> -->
                     <view class="avatar">
-                        <image src="{{UserHeadurlArry[index]}}"></image>
+                        <image src="{{DataPostArry_Heat[index].UserHeadurl}}"></image>
                     </view>
-                    <text c>{{item.feed_source_name}}{{UsernameArry[index]}}</text>
+                    <text c>{{item.feed_source_name}}{{DataPostArry_Heat[index].Username}}</text>
             </view>
             <view class="feed-content">
                 <!-- 问题部分 -->
                 <view class="question" qid="{{question_id}}" bindtap="bindQueTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
                     <a>
-                        <text  class="question-link">{{DataPostArry[index].Question}}</text>
+                        <text  class="question-link">{{DataPostArry_Heat[index].Question}}</text>
                     </a>
                 </view>
                 <!-- 问题描述部分 -->
                 <view class="answer-body">
-                    <view bindtap="bindItemTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
-                        <text class="answer-txt" aid="{{answer_id}}">{{DataPostArry[index].Questiondes}}</text>
+                    <view bindtap="bindItemTap" data-post_id="{{DataPostArry_Heat[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                        <text class="answer-txt" aid="{{answer_id}}">{{DataPostArry_Heat[index].Questiondes}}</text>
                     </view>
-                    <view class="answer-actions" bindtap="bindItemTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                    <view class="answer-actions" bindtap="bindItemTap" data-post_id="{{DataDataPostArry_HeatPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
                         <view class="like dot">
-                            <a>{{DataPostArry[index].Up_Record_num}} 赞同 </a>
+                            <a>{{DataPostArry_Heat[index].Up_Record_num}} 赞同 </a>
                         </view>
                         <view class="comments dot">
-                            <a>{{DataPostArry[index].Reply_Record_num}} 评论 </a>
+                            <a>{{DataPostArry_Heat[index].Reply_Record_num}} 评论 </a>
                         </view>
                         <view class="follow-it">
                             <a>关注问题</a>

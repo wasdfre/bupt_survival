@@ -58,8 +58,27 @@ Page({
     this.setData({
       replyNumber: 0
     })
-    wx.navigateBack({
+    wx.navigateTo({
       url: '../Mine_Reply/Mine_Reply',
     })
   },
+  feedback: function () {
+    // var data = new Date()
+    // wx.cloud.callFunction({
+    //   name: 'upDateDiscuss',
+    //   data: {
+    //     youid: wx.getStorageSync("myOpenId"),
+    //     time: data.getTime()
+    //   },
+    //   success: function (res) {
+    //     console.log(res, "++++++++++++++")
+    //   }
+    // })
+    // this.setData({
+    //   replyNumber: 0
+    // })
+    wx.navigateTo({
+      url: '../feedback/feedback',
+    })
+  }
 })

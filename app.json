@@ -11,8 +11,7 @@
     "pages/answer_question/answer_question",
     "pages/more/more",
     "pages/answer/answer",
-    "pages/web_disp/web_disp",
-    "pages/search/search"
+    "pages/web_disp/web_disp"
   ],
   "window": {
     "backgroundTextStyle": "light",

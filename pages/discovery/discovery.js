@@ -24,7 +24,8 @@ Page({
     feed: [],
     feed_length: 0,
     //问题内容列表
-    DataPostArry:[],  
+    DataPostArry:[], 
+    DataPostArry_Heat:[], 
     //用户头像列表             
     UserHeadurlArry:[],    
     //点赞信息列表
@@ -37,10 +38,15 @@ Page({
     replyData: []   
   },
   //一载入页面
+  sort_index:function (a,b){
+    a_heat=a.Up_Record_num*0.3+a.Reply_Record_num*0.7;
+    b_heat=b.Up_Record_num*0.3+b.Reply_Record_num*0.7;
+    return a.Up_Record_num*0.3+a.Reply_Record_num*0.7-b.Up_Record_num*0.3+b.Reply_Record_num*0.7;
+  },
   onLoad: function () 
   {
-    this.gethis();
-    this.getnew();
+    // this.gethis();
+    // this.getnew();
     //获取正在使用的用户信息
     wx.getStorage
     ({
@@ -102,13 +108,18 @@ Page({
                     }
                   }
                 }
+                
                 // console.log("11113dwadw23232",postdata)
                 that.setData
                 ({
-                  DataPostArry: postdata
+                  DataPostArry: postdata,
+                  DataPostArry_Heat: postdata.sort(function (a,b)
+                  {
+                    return b.Up_Record_num*0.3+b.Reply_Record_num*0.7-a.Up_Record_num*0.3+a.Reply_Record_num*0.7;
+                  },)
                   // UserHeadurlArry: that.data.UserHeadurlArry
                 });
-                // console.log("头像",that.data.DataPostArry)
+                console.log("头像",that.data.DataPostArry_Heat)
               }
             )
           }).catch((ex)=>
@@ -119,73 +130,74 @@ Page({
 
        }
      })
-    this.refresh();
+    // this.refresh();
   },
-  /*
-  //获取本地记录
-  gethis() {
-    let that = this;
-    wx.getStorage({
-          key: 'history',
-          success: function(res) {
-                let hislist = JSON.parse(res.data);
-                //限制长度
-                if (hislist.length > 5) {
-                      hislist.length = 5
-                }
-                that.setData({
-                      hislist: hislist
-                })
-          },
-    })
-},
+  
 
-//跳转详情
-detail(e) {
-  let that = this;
-  wx.navigateTo({
-        url: '/pages/detail/detail?scene=' + e.currentTarget.dataset.id,
-  })
-},
-//搜索结果
-search(n) {
-  let that = this;
-  let key = that.data.key;
-  if (key == '') {
-        wx.showToast({
-              title: '请输入关键词',
-              icon: 'none',
-        })
-        return false;
-  }
-  wx.setNavigationBarTitle({
-        title:'"'+ that.data.key + '"的搜索结果',
-  })
-  wx.showLoading({
-        title: '加载中',
-  })
-  if (n !== 'his') {
-        that.history(key);
-  }
-  db.collection('publish').where({
-        status: 0,
-        dura: _.gt(new Date().getTime()),
-        key: db.RegExp({
-              regexp: '.*' + key + '.*',
-              options: 'i',
-        })
-  }).orderBy('creat', 'desc').limit(20).get({
-        success(e) {
-              wx.hideLoading();
-              that.setData({
-                    blank: true,
-                    page: 0,
-                    list: e.data,
-                    nomore: false,
-              })
-        }
-  })
-},
+//   //获取本地记录
+//   gethis() {
+//     let that = this;
+//     wx.getStorage({
+//           key: 'history',
+//           success: function(res) {
+//                 let hislist = JSON.parse(res.data);
+//                 //限制长度
+//                 if (hislist.length > 5) {
+//                       hislist.length = 5
+//                 }
+//                 that.setData({
+//                       hislist: hislist
+//                 })
+//           },
+//     })
+// },
+
+// //跳转详情
+// detail(e) {
+//   let that = this;
+//   wx.navigateTo({
+//         url: '/pages/detail/detail?scene=' + e.currentTarget.dataset.id,
+//   })
+// },
+// //搜索结果
+// search(n) {
+//   let that = this;
+//   let key = that.data.key;
+//   if (key == '') {
+//         wx.showToast({
+//               title: '请输入关键词',
+//               icon: 'none',
+//         })
+//         return false;
+//   }
+//   wx.setNavigationBarTitle({
+//         title:'"'+ that.data.key + '"的搜索结果',
+//   })
+//   wx.showLoading({
+//         title: '加载中',
+//   })
+//   if (n !== 'his') {
+//         that.history(key);
+//   }
+//   db.collection('publish').where({
+//         status: 0,
+//         dura: _.gt(new Date().getTime()),
+//         key: db.RegExp({
+//               regexp: '.*' + key + '.*',
+//               options: 'i',
+//         })
+//   }).orderBy('creat', 'desc').limit(20).get({
+//         success(e) {
+//               wx.hideLoading();
+//               that.setData({
+//                     blank: true,
+//                     page: 0,
+//                     list: e.data,
+//                     nomore: false,
+//               })
+//         }
+//   })
+// },
 onReachBottom() {
   this.more();
 },
@@ -205,50 +217,50 @@ onPageScroll: function (e) {
   })
 },
 //加载更多
-more() {
-  let that = this;
-  if (that.data.nomore || that.data.list.length < 20) {
-        return false
-  }
-  let page = that.data.page + 1;
-  if (that.data.collegeCur == -2) {
-        var collegeid = _.neq(-2); //除-2之外所有
-  } else {
-        var collegeid = that.data.collegeCur + '' //小程序搜索必须对应格式
-  }
-  db.collection('publish').where({
-        status: 0,
-        dura: _.gt(new Date().getTime()),
-        key: db.RegExp({
-              regexp: '.*' + that.data.key + '.*',
-              options: 'i',
-        })
-  }).orderBy('creat', 'desc').skip(page * 20).limit(20).get({
-        success: function (res) {
-              if (res.data.length == 0) {
-                    that.setData({
-                          nomore: true
-                    })
-                    return false;
-              }
-              if (res.data.length < 20) {
-                    that.setData({
-                          nomore: true
-                    })
-              }
-              that.setData({
-                    page: page,
-                    list: that.data.list.concat(res.data)
-              })
-        },
-        fail() {
-              wx.showToast({
-                    title: '获取失败',
-                    icon: 'none'
-              })
-        }
-  })
-},
+// more() {
+//   let that = this;
+//   if (that.data.nomore || that.data.list.length < 20) {
+//         return false
+//   }
+//   let page = that.data.page + 1;
+//   if (that.data.collegeCur == -2) {
+//         var collegeid = _.neq(-2); //除-2之外所有
+//   } else {
+//         var collegeid = that.data.collegeCur + '' //小程序搜索必须对应格式
+//   }
+//   db.collection('publish').where({
+//         status: 0,
+//         dura: _.gt(new Date().getTime()),
+//         key: db.RegExp({
+//               regexp: '.*' + that.data.key + '.*',
+//               options: 'i',
+//         })
+//   }).orderBy('creat', 'desc').skip(page * 20).limit(20).get({
+//         success: function (res) {
+//               if (res.data.length == 0) {
+//                     that.setData({
+//                           nomore: true
+//                     })
+//                     return false;
+//               }
+//               if (res.data.length < 20) {
+//                     that.setData({
+//                           nomore: true
+//                     })
+//               }
+//               that.setData({
+//                     page: page,
+//                     list: that.data.list.concat(res.data)
+//               })
+//         },
+//         fail() {
+//               wx.showToast({
+//                     title: '获取失败',
+//                     icon: 'none'
+//               })
+//         }
+//   })
+// },
 
 
 
@@ -284,7 +296,7 @@ more() {
     console.log("搜索内容：", event.detail.value)    //这里可以让我们在开发的时候在console控制台上看到我们的结果
     Rname1 = event.detail.value //这里的Rname1 也是需要在前面进行宏定义的格式为（ let Rname1 = "" ） ，然后给它赋值
   },
-  */
+
   //搜索框
   upper: function () {
     wx.showNavigationBarLoading()
@@ -302,17 +314,17 @@ more() {
   //  console.log("scroll")
   //},
 
-  //网络请求数据, 实现首页刷新
-  refresh0: function(){
-    var index_api = '';
-    util.getData(index_api)
-        .then(function(data){
-          //this.setData({
-          //
-          //});
-          console.log(data);
-        });
-  },
+  // //网络请求数据, 实现首页刷新
+  // refresh0: function(){
+  //   var index_api = '';
+  //   util.getData(index_api)
+  //       .then(function(data){
+  //         //this.setData({
+  //         //
+  //         //});
+  //         console.log(data);
+  //       });
+  // },
 
   //使用本地 fake 数据实现刷新效果
   getData: function(){

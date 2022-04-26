@@ -25,9 +25,9 @@
           <view class="feed-source">
                 <!-- <a class=""> -->
                   <view class="avatar">
-                      <image src="{{UserHeadurlArry[index]}}"></image>
+                      <image src="{{DataPostArry[index].UserHeadurl}}"></image>
                   </view>
-                  <text c>{{item.feed_source_name}}{{UsernameArry[index]}}</text>
+                  <text c>{{item.feed_source_name}}{{DataPostArry[index].Username}}</text>
                 <!-- </a> -->
                 <!-- 更多图标 -->
                 <!-- <image class="item-more" mode="aspectFit" src="../../images/more.png"></image> -->
@@ -53,7 +53,7 @@
                           <a>{{DataPostArry[index].Reply_Record_num}} 评论 </a>
                     </view>
                     <view class="follow-it">
-                          <a>关注问题</a>
+                          <a>{{DataPostArry[index].Time}}</a>
                     </view>
                   </view>
                 </view>

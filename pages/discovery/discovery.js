@@ -44,23 +44,26 @@ Page({
     ({
       success: res => 
       {
-        console.log(1111,res)
+        var res_temp=res.data.reverse();
+        
         that.setData
         ({
-          DataPostArry: res.data//获取全部数据
+          DataPostArry: res_temp//获取全部数据
         })
         
         //异步promise对象，不用管
         //map，每个对象调用一个函数，item赋为空值
-        Promise.all(res.data.map((item)=>item["_openid"])).then
+        Promise.all(res_temp.map((item)=>item["_openid"])).then
         (
           res=>
           {
+            var postdata=res_temp;
+            console.log("11113dwadw23232",postdata)
             //这里是_定
             let _ = get_inf_db.command;
             // console.log('dadwadaw',res.data.map((item)=>item[key]))
             //根据所有用户的openid获取用户数据，在数据库Assistant_User
-            console.log("头像ers",res)
+            // console.log("头像ers",res)
             get_inf_db.collection('Assistant_User').where
             ({
               // _openid: "oSe9A5dvjrhoLCUz4pAKmN9487PY"
@@ -69,28 +72,34 @@ Page({
             }).get().then
             (res => 
               {
-                console.log("头像",res)
-                that.data.UsernameArry = [];//用户名
-                that.data.UserHeadurlArry=[];//头像
-                for (let i = 0; i < this.data.DataPostArry.length;i++)
+                
+                // console.log("头像",res)
+                // that.data.UsernameArry = [];//用户名
+                // that.data.UserHeadurlArry=[];//头像
+                // console.log("1111232",res)
+                for (let i = 0; i < postdata.length;i++)
                 {
                   //已知问题列表中每个问题对应的openid
-                  let openId = this.data.DataPostArry[i]._openid;
+                  let openId = postdata[i]._openid;
                   for(let j=0;j<res.data.length;j++)
                   {
                     if(openId == res.data[j]._openid)
                     {//获取对应用户名和头像
-                      that.data.UsernameArry.push(res.data[j].Username);
-                      that.data.UserHeadurlArry.push(res.data[j].User_head_url);
+                      postdata[i]['Username']=res.data[j].Username;
+                      //这里有什么区别
+                      postdata[i]['UserHeadurl']=res.data[j].User_head_url;
+                      // that.data.UsernameArry.push(res.data[j].Username);
+                      // that.data.UserHeadurlArry.push(res.data[j].User_head_url);
                     }
                   }
                 }
+                // console.log("11113dwadw23232",postdata)
                 that.setData
                 ({
-                  UsernameArry: that.data.UsernameArry,
-                  UserHeadurlArry: that.data.UserHeadurlArry
+                  DataPostArry: postdata
+                  // UserHeadurlArry: that.data.UserHeadurlArry
                 });
-                // console.log("头像",that.data.UsernameArry)
+                // console.log("头像",that.data.DataPostArry)
               }
             )
           }).catch((ex)=>

@@ -1,4 +1,4 @@
-<scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+<scroll-view scroll-y="true" class="container"  upper-threshold="10" lower-threshold="5"   scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 
 
 <!-- 顶部选择栏 -->
@@ -8,12 +8,14 @@
     </view>
   </view>
 
-  <scroll-view scroll-y="true" class="container discovery withtab" bindscrolltoupper="upper" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+  <scroll-view scroll-y="true" class="container discovery withtab"   scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
     <view class="search flex-wrp">
       <view class="search-left flex-item">
           <image src="../../images/search.png"></image>
           <!-- 搜索栏 -->
+          <mp-sticky offset-top="32">
           <input placeholder="搜索话题或问题" placeholder-class="search-placeholder"bindinput="keyInput" bindconfirm="search"/>
+        </mp-sticky>
       </view>
       
   </view>

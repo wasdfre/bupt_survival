@@ -14,11 +14,12 @@
     "pages/search/search"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#0068C4",
-    "navigationBarTitleText": "知乎",
+    "navigationBarTitleText": "北邮生存指南",
     "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#efefef"
   },
   "tabBar": {
     "color": "#626567",

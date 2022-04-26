@@ -10,14 +10,23 @@
     </view>
   </view>
 
-  <view class="my">
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" bindtap="discussbutton">
-        <image src="../../images/eye.png"bindtap="discussbutton"></image>
-      </view>
-      <view class="myitem-name flex-item" bindtap="discussbutton">
-        <text>我的回答</text>
+    <view class="my">
+      <view class="my-item flex-wrp">
+        <view class="myitem-icon flex-item" bindtap="discussbutton">
+          <image src="../../images/eye.png"bindtap="discussbutton"></image>
+        </view>
+        <view class="myitem-name flex-item" bindtap="discussbutton">
+          <text>我的回答</text>
+        </view>
       </view>
     </view>
-</view>
+
+    <view class="my">
+      <button class="my-item flex-wrp" open-type="feedback">
+          <view class="myitem-icon flex-item" >
+            <image src="../../images/eye.png"></image>
+          </view>       
+          <view class="myitem-name flex-item">意见反馈</view>
+      </button>
+    </view>
 </view>

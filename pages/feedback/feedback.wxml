@@ -1,0 +1,9 @@
+<button class="myitem-icon flex-item" open-type="feedback">
+  <view class="item_left item">
+    <view class="icon"><image src="../../images/personal_icon/feedback.png" style="width:24px;height:24px;"></image></view>
+      <view class="myitem-name flex-item">意见反馈</view>
+    </view>
+  <view class="item_right">
+    <view class="arrow"><image src="../../images/personal_icon/arrow_right.png" style="width:20px;height:20px;"></image></view>
+  </view>
+</button>

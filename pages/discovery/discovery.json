@@ -1,7 +1,3 @@
 {
-    "navigationBarTitleText": "",
-    "usingComponents":
-    {
-        "mp-sticky": "@miniprogram-component-plus/sticky"
-    }
+    "navigationBarTitleText": ""
 }

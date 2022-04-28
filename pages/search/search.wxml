@@ -1,2 +1,78 @@
-<!--pages/search/search.wxml-->
-<text>pages/search/search.wxml</text>
+<scroll-view scroll-y="true" class="container discovery"   scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+<view wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' >
+    <view class="feed-item">
+          <view class="feed-source">
+                <view class="avatar">
+                      <image src="{{DataPostArry[index].UserHeadurl}}"></image>
+                  </view>
+                  <text c>{{item.feed_source_name}}{{DataPostArry[index].Username}}</text>
+          </view>
+          <view class="feed-content">
+              <!-- 问题部分 -->
+              <view class="question" qid="{{question_id}}" bindtap="bindQueTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                  <a>
+                      <!-- 使用text的字体 -->
+                      <text  class="question-link">{{DataPostArry[index].Question}}</text>
+                  </a>
+              </view>
+              <!-- 回答部分 -->
+              <view class="answer-body">
+                  <view bindtap="bindItemTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                      <text class="answer-txt" aid="{{answer_id}}">{{DataPostArry[index].Questiondes}}</text>
+                  </view>
+                  <view class="answer-actions" bindtap="bindItemTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                    <view class="like dot">
+                          <a>{{DataPostArry[index].Up_Record_num}} 赞同 </a>
+                    </view>
+                    <view class="comments dot">
+                          <a>{{DataPostArry[index].Reply_Record_num}} 评论 </a>
+                    </view>
+                    <view class="follow-it">
+                          <a>关注问题</a>
+                    </view>
+                  </view>
+                </view>
+            </view>
+        </view>
+    </view> 
+    <!-- </block> -->
+
+  <view class="ctnt1 placehold" hidden="{{currentNavtab==1 ? '' : true}}">
+    <view wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' >
+        <view class="feed-item">
+            <view class="feed-source">
+                <!-- <a class=""> -->
+                    <view class="avatar">
+                        <image src="{{DataPostArry_Heat[index].UserHeadurl}}"></image>
+                    </view>
+                    <text c>{{item.feed_source_name}}{{DataPostArry_Heat[index].Username}}</text>
+            </view>
+            <view class="feed-content">
+                <!-- 问题部分 -->
+                <view class="question" qid="{{question_id}}" bindtap="bindQueTap" data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                    <a>
+                        <text  class="question-link">{{DataPostArry_Heat[index].Question}}</text>
+                    </a>
+                </view>
+                <!-- 问题描述部分 -->
+                <view class="answer-body">
+                    <view bindtap="bindItemTap" data-post_id="{{DataPostArry_Heat[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                        <text class="answer-txt" aid="{{answer_id}}">{{DataPostArry_Heat[index].Questiondes}}</text>
+                    </view>
+                    <view class="answer-actions" bindtap="bindItemTap" data-post_id="{{DataDataPostArry_HeatPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+                        <view class="like dot">
+                            <a>{{DataPostArry_Heat[index].Up_Record_num}} 赞同 </a>
+                        </view>
+                        <view class="comments dot">
+                            <a>{{DataPostArry_Heat[index].Reply_Record_num}} 评论 </a>
+                        </view>
+                        <view class="follow-it">
+                            <a>关注问题</a>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+  </view>
+  </scroll-view>

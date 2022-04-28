@@ -27,7 +27,7 @@
 }
 .placehold{
   font-size: 28rpx;
-  padding: 80rpx 0;
+  padding: 0rpx 0;
 }
 
 .container .search{

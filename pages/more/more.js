@@ -5,23 +5,15 @@ const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
 const _ = db.command
 Page({
   data: {
-    motto: 'Hello World',
-    // userInfo: {}
     Username:'',
     User_head_url:'',
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: ''
-    })
-  },
-  //初始加载
-  onShow: function () 
+ 
+
+  //获取用户信息
+  get_user_data:function()
   {
-    console.log('onLoad')
     var that = this
-    //根据openid从数据库中获取信息
     db.collection('Assistant_User').where
     ({
       _openid: wx.getStorageSync("myOpenId"),
@@ -43,42 +35,36 @@ Page({
       }
     })
   },
-  discussbutton: function () {
-    var data = new Date()
-    wx.cloud.callFunction({
-      name: 'upDateDiscuss',
-      data: {
-        youid: wx.getStorageSync("myOpenId"),
-        time: data.getTime()
-      },
-      success: function (res) {
-        console.log(res, "++++++++++++++")
-      }
-    })
-    this.setData({
-      replyNumber: 0
-    })
-    wx.navigateTo({
-      url: '../Mine_Reply/Mine_Reply',
-    })
+
+   //初始加载
+  onShow: function () 
+  {
+    //根据openid从数据库中获取信息
+    this.get_user_data();
+   
   },
-  feedback: function () {
-    // var data = new Date()
-    // wx.cloud.callFunction({
+
+  //点击我的回答
+  discussbutton: function ()
+   {
+    var data = new Date()
+    //更新最后一次回答的时间，这个函数位置在这里好像不太对
+    // wx.cloud.callFunction
+    // ({
     //   name: 'upDateDiscuss',
     //   data: {
     //     youid: wx.getStorageSync("myOpenId"),
     //     time: data.getTime()
     //   },
-    //   success: function (res) {
+    //   success: function (res) 
+    //   {
     //     console.log(res, "++++++++++++++")
     //   }
     // })
-    // this.setData({
-    //   replyNumber: 0
-    // })
-    wx.navigateTo({
-      url: '../feedback/feedback',
+    wx.navigateTo
+    ({
+      url: '../Mine_Reply/Mine_Reply',
     })
-  }
+  },
+  //等待添加一个反馈函数
 })

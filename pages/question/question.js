@@ -136,13 +136,7 @@ Page({
     })
   },
 
-
-//不管
-  tapName: function(event){
-    console.log(event)
-  },
-
-
+  
 //数据库增加点赞信息
 upload_up_data:function()
 {

@@ -1,15 +1,15 @@
 {
   "pages": [
-    "pages/Mine_Reply/Mine_Reply",
+    "pages/more/more",
     "pages/discovery/discovery",
     "pages/First_page/First_page",
     "pages/Login/Login",
-    
+    "pages/Mine_Reply/Mine_Reply",
     "pages/notify/notify",
     "pages/index/index",
     "pages/question/question",
     "pages/answer_question/answer_question",
-    "pages/more/more",
+    
     "pages/answer/answer",
     "pages/web_disp/web_disp",
     "pages/feedback/feedback",
@@ -60,6 +60,9 @@
         "selectedIconPath": "images/burger_focus.png"
       }
     ]
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
   },
   "networkTimeout": {
     "request": 10000,

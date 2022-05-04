@@ -31,14 +31,12 @@ discussMe: function () {
     discussList: []
   })
   //openid获取方式修改
-  console.log("1111fr",app.globalData.openid)
   db.collection('My_ReplyData').where({ //别人评论我
     PostUserId: app.globalData.openid
   }).get
   ({
     success: res => 
     {
-      console.log("1111ffr",res.data.length)
 
       for (let i = 0; i < res.data.length; i++) 
       {
@@ -108,7 +106,6 @@ searchAssistantUp: function ()
     Up_id: app.globalData.openid
   }).get({
     success: res => {
-      // console.log(2233,res.data)
       for (var j = 0; j < res.data.length; j++) {
 
         let index = res.data.length - j - 1
@@ -131,7 +128,6 @@ searchAssistantUp: function ()
           _id: res.data[index].Up_Post_id
         }).get({
           success: res => {
-            console.log(2233,res)
             var context = 'upList[' + index + '].context';//获取帖子内容
             that.setData({
               [context]: res.data[0].Question

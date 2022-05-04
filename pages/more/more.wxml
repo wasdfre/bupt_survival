@@ -1,32 +1,41 @@
+<scroll-view scroll-y class="scrollPage">
+  <view class="UCenter-bg">
+    <image src="{{User_head_url}}"  class="png" mode="widthFix"></image>
+    <view class="text-xl">{{Username}}
+    </view>
 
-<view class="container more">
-  <view class="user flex-wrp">
-    <view class="avatar flex-item">
-      <image class="userinfo-avatar" src="{{User_head_url}}" background-size="cover"></image>
-    </view>
-    <view class="user-info flex-item">
-      <text class="userinfo-nickname">{{Username}}</text>
-      <!-- <text class="edit">查看或编辑个人主页</text> -->
-    </view>
+    <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>
-
-    <view class="my">
-      <view class="my-item flex-wrp">
-        <view class="myitem-icon flex-item" bindtap="discussbutton">
-          <image src="../../images/eye.png"bindtap="discussbutton"></image>
-        </view>
-        <view class="myitem-name flex-item" bindtap="discussbutton">
-          <text>我的问题</text>
-        </view>
+  
+  <!-- 要凑够4条以上，不然动态图片长度不够 -->
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+    <view class="cu-item arrow">
+      <view class="content" bindtap="discussbutton" >
+       <text class="cuIcon-formfill text-green"></text>
+        <text class="text-grey">我的问题</text>
       </view>
     </view>
 
-    <view class="my">
-      <button class="my-item flex-wrp" open-type="feedback">
-          <view class="myitem-icon flex-item" >
-            <image src="../../images/eye.png"></image>
-          </view>       
-          <view class="myitem-name flex-item">意见反馈</view>
+    <view class="cu-item arrow" bindtap="discussbutton">
+      <navigator class="content" url="/pages/about/log/log" hover-class="none">
+        <text class="cuIcon-formfill text-green"></text>
+        <text class="text-grey">我的问题</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="feedback">
+        <text class="cuIcon-writefill text-cyan"></text>
+        <text class="text-grey">意见反馈</text>
       </button>
     </view>
-</view>
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/about/about" hover-class="none">
+        <image src="/images/logo.png" class="png" mode="aspectFit"></image>
+        <text class="text-grey">关于生存指南</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="cu-tabbar-height"></view>
+</scroll-view>
+
+<!-- </view> -->

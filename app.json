@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/Mine_Reply/Mine_Reply",
     "pages/discovery/discovery",
     "pages/First_page/First_page",
     "pages/Login/Login",
-    "pages/Mine_Reply/Mine_Reply",
+    
     "pages/notify/notify",
     "pages/index/index",
     "pages/question/question",

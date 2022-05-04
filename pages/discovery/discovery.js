@@ -68,7 +68,6 @@ Page({
   //获得问题数据
   get_question:function()
   {
-    const db = wx.cloud.database()
     //获取全部数据
     db.collection('Assistant_DataSheet').get
     ({

@@ -1,34 +1,31 @@
-<view wx:for="{{DataPost_arry.length}}" wx:key='DataPost' class = 'item-contain' ><!--循环生成body-->
+<view wx:for="{{DataPostArry.length}}" wx:key='DataPost' class = 'item-contain' ><!--循环生成body-->
 <!-- #我的发布界面 -->
       <view class='top'>
         <view class='hidden_head'>
 
-          <view class='userphoto'><image src='{{User_head_url_arry[index]}}'></image></view>
-          <view class='username'><label class='lb_name'>{{Username_arry[index]}}</label></view>
-          <view class='time'><label class='lb_time'>{{DataPost_arry[index].Time}}</label></view>
+          <view class='userphoto'><image src='{{DataPostArry[index].UserHeadurl}}'></image></view>
+          <view class='username'><label class='lb_name'>{{DataPostArry[index].Username}}</label></view>
+          <view class='time'><label class='lb_time'>{{DataPostArry[index].Time}}</label></view>
         </view>
-        <view class='hidden_second'>
-          <label class='lb_tx'>{{DataPost_arry[index].Question}}</label>
-          <label class='lb_tx'>{{DataPost_arry[index].Questiondes}}</label>
+        <view class='hidden_second' bindtap='to_Reply' data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}">
+          <view class='lb_tx'>{{DataPostArry[index].Question}}</view>
+          <view class='lb_tx'>{{DataPostArry[index].Questiondes}}</view>
         </view>
         <view class='hidden_third'>
-         <image wx:for="{{DataPost_arry[index].Photo_arr}}" wx:key='Photo_arr' wx:for-item="url" src='{{url}}' bindtap="previewImage" data-myimg='{{url}}' ></image>
+         <image wx:for="{{DataPostArry[index].Photo_arr}}" wx:key='Photo_arr' wx:for-item="url" src='{{url}}' bindtap="previewImage" data-myimg='{{url}}' ></image>
         </view>
         <view class='hidden_buttom'>
-          <view class='b_1'><text>{{DataPost_arry[index].Type}}</text></view>
-           <block wx:if="{{DataPost_arry[index]._openid==UserId}}"> 
-          <view class='b_11' bindtap='Remove_Post' data-post_id="{{DataPost_arry[index]._id}}" data-postopenid="{{DataPost_arry[index]._openid}}" data-nowIndex="{{index}}"><image src='/images/del1.png'></image><label>删除</label></view>
+          <view class='b_1'><text>{{DataPostArry[index].Type}}</text></view>
+           <block wx:if="{{DataPostArry[index]._openid==UserId}}"> 
+          <view class='b_11' bindtap='Remove_Post' data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}"><image src='/images/del1.png'></image><label>删除</label></view>
           </block>
           <block wx:else>
           <view class='b_11_2'></view>
           </block>
 
-
-     
-
-          <view class='b_3'><label>{{DataPost_arry[index].Up_Record_num}}</label></view>
-          <view class='b_4' bindtap='to_Reply' data-post_id="{{DataPost_arry[index]._id}}" data-postopenid="{{DataPost_arry[index]._openid}}" data-nowIndex="{{index}}"><image src='/images/Reply.png'></image></view>
-          <view class='b_5'><label>{{DataPost_arry[index].Reply_Record_num}}</label></view>
+          <view class='b_3'><label>{{DataPostArry[index].Up_Record_num}}</label></view>
+          <view class='b_4' bindtap='to_Reply' data-post_id="{{DataPostArry[index]._id}}" data-postopenid="{{DataPostArry[index]._openid}}" data-nowIndex="{{index}}"><image src='/images/Reply.png'></image></view>
+          <view class='b_5'><label>{{DataPostArry[index].Reply_Record_num}}</label></view>
 
         </view>
       

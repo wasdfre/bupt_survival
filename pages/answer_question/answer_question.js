@@ -1,51 +1,24 @@
 const app = getApp()
 var util = require('../../utils/util.js');
 const db = wx.cloud.database();
+
+/*实现功能
+  获取表单中输入的回答以及图片(暂未)，上传到数据库，在对应回答处回答数+1 */
 Page({
 
   data: {
-    PostUserId: '',//发帖人
-    ReplyOpenId: '',//回答人
+    PostUserId: '',//
     inputMessage: '',//输入的内容
     SendTime: '',//发送时间
     Time: '',
     telValue: "",//输入的文字
-    UserInfo:'',
     inputMessage: '',
-    SendTime: '',
-    Time: '',
-    HeadImageUrl: '',
-    UserName: '',
+    UserName: '',//这个需要吗
     PageId: '',
-    UpPageId: '',
-    PostUserId: '',
     ReplyOpenId: '',
-    userName:''
+    image:'',
+  },
 
-
-  },
-  actionSheetTap: function () 
-  {
-    this.setData
-    ({
-      actionSheetHidden: !this.data.actionSheetHidden
-    })
-  },
-  actionSheetbindchange: function () 
-  {
-    this.setData
-    ({
-      actionSheetHidden: !this.data.actionSheetHidden
-    })
-  },
-  bindMenu1: function ()
-  {
-    this.setData
-    ({
-      menu: 1,
-      actionSheetHidden: !this.data.actionSheetHidden
-    })
-  },
   //获得输入区输入
   getInput: function (e) 
   {
@@ -55,119 +28,77 @@ Page({
     })
     console.log("efwef w",e)
   },
-formSubmit: function (e) 
-{
-    var that = this;
-    wx.showToast
-    ({
-      title: '评论成功',
-      icon: 'none'
-    })
-    this.setData
-    ({
-      // discussShow: true,
-      inputMessage:that.data.telValue,
-      SendTime: Date.now(),
-      Time: util.formatTime(new Date)
-    })
 
-    wx.cloud.callFunction({
-      name: 'reply',
-      data: 
-      {
-        Page_id: that.data.PageId
-      },
-      success: function (res) {
-      //  console.log("deqwfwefw",res.result)
-      }
-    })
-    //return 作用
+
+  // 提交回答到数据库中
+  upload_answer:function () 
+  {
+    var that=this
     return db.collection('My_ReplyData').add
     ({ 
       data: 
       {
         context: that.data.inputMessage,
-        image: that.data.HeadImageUrl,
+        image: that.data.image,
         time: that.data.SendTime,
         name: that.data.UserName,
         PageId: that.data.PageId,
         PostUserId: that.data.PostUserId,
         PageTime: that.data.Time
       }
-    }).then(res => {
-      console.log(1213232,that.data.PageId);
-      //增加帖子数
-      wx.cloud.callFunction({
-        name: 'Reply_post',
-        data: {
-          PageId: that.data.PageId,
-        },
-        success: function (res) {
-          console.log("Reply_post OK!");
-          wx.navigateBack({
-                url: '../question/question',
-          })
-        },
-        fail: err => {
-          console.log('error:', err)
-        }
-      })
     })
   },
-  //   const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
-  //   return db.collection('My_ReplyData').add
-  //   ({
-  //     data: 
-  //     {
-  //       context: that.data.inputMessage,
-  //       image: that.data.HeadImageUrl,
-  //       time: that.data.SendTime,
-  //       name: that.data.UserName,
-  //       PageId: that.data.PageId,
-  //       PostUserId: that.data.PostUserId,
-  //       PageTime: that.data.Time
-  //     }, success: function (res) 
-  //     {
-  //       that.setData
-  //       ({
-  //         inputMessage: ''
-  //       })
-  //     }
-  //   }).then(res=>
-  //   {
-  //     wx.cloud.callFunction
-  //     ({
-  //       name: 'Reply_post',
-  //       data: 
-  //       {
-  //         Post_id: e.currentTarget.dataset.post_id,
-  //       },
-  //       success: function (res) 
-  //       {
-  //         console.log("Reply_post OK!");
-  //       },
-  //       fail: err => 
-  //       {
-  //         console.log('error:', err)
-  //       }
-  //     })
-  //   })
-  //     //但是会叠好多层
-  //   wx.navigateBack
-  //   ({
-  //     url: '../question/question',
-  //   })
-  // },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  //  success: function (res) 
-  //  {
-  //    that.setData
-  //    ({
-  //      inputMessage: ''
-  //    })
-  //  }
+
+
+  //添加回答数到数据库中
+  update_answer_number:function()
+  {
+    //在对应问题处增加回答数
+    var that = this;
+    wx.cloud.callFunction
+    ({
+      name: 'Reply_post',
+      data: 
+      {
+        PageId: that.data.PageId,//根据pageid 索引
+      },
+      success: function (res) 
+      {
+        console.log("Reply_post OK!");
+        wx.navigateBack
+        ({
+              url: '../question/question',
+        })
+      },
+    })
+  },
+
+
+  //点击提交按钮后操作
+  formSubmit: function (e) 
+  {
+      var that = this;
+      wx.showToast
+      ({
+        title: '评论成功',
+        icon: 'none'
+      })
+      this.setData
+      ({
+        // discussShow: true,
+        inputMessage:that.data.telValue,
+        SendTime: Date.now(),
+        Time: util.formatTime(new Date)
+      })
+      //先添加回答到数据库中
+      this.upload_answer().then(res => 
+      {
+        //然后增加对应问题评论数
+        that.update_answer_number();
+      })
+    },
+
+  
   onLoad: function (options)
   {
     var that = this;
@@ -179,24 +110,8 @@ formSubmit: function (e)
         that.setData
         ({
           PageId: res.data.post_id,
-          PostUserId: res.data.postopenid
-        })
-        console.log(1111111,res)
-        //获取自己的头像和用户名，使其可以在评论栏显示。、
-        db.collection('Assistant_User').where
-        ({
-          _openid: app.globalData.openid
-        }).get
-        ({
-          success: function (res)
-           {
-            that.setData({
-              HeadImageUrl: res.data[0].User_head_url,
-              UserName: res.data[0].Username,
-              ReplyOpenId: res.data[0]._openid
-            })
-            console.log("我是用户的头像和姓名：", that.data)
-          }
+          PostUserId: res.data.postopenid,
+          ReplyOpenId:app.globalData.openid
         })
       }
     })

@@ -1,46 +1,11 @@
-<scroll-view scroll-y="true" class="container"  upper-threshold="10" lower-threshold="5"   scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-
-
-<!-- 顶部选择栏 -->
-  <view class="top-tab flex-wrp flex-tab " >
-    <view class="toptab flex-item {{currentNavtab==idx ? 'active' : ''}}" wx:for="{{navTab}}" wx:for-index="idx" wx:for-item="itemName" data-idx="{{idx}}" bindtap="switchTab">
-      {{itemName}}
-    </view>
-  </view>
-
-  <scroll-view scroll-y="true" class="container discovery withtab"   scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-    <view class="search flex-wrp">
-      <view class="search-left flex-item">
-          <image src="../../images/search.png"></image>
-          <!-- 搜索栏 -->
-          <input placeholder="搜索话题或问题"  placeholder-class="search-placeholder"bindinput="keyInput"  bindconfirm="search" auto-focus="true" value='{{inputValue}}'/>
-      </view>
-      
-  </view>
-    <!-- 当页面选择0时 -->
-    <view class="ctnt0" hidden="{{currentNavtab==0 ? '' : true}}">
-      <!-- 轮播图 -->
-      <swiper class="activity" indicator-dots="{{indicatorDots}}"
-              autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-        <block wx:for="{{imgUrls}}">
-          <swiper-item>
-            <image src="{{item}}" class="slide-image" width="355" height="155"/>
-          </swiper-item>
-        </block>
-      </swiper>
-     <!-- 问题循环 -->
-       <!-- <block wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' class = 'item-contain' > -->
-        <view wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' >
-      <view class="feed-item">
+<scroll-view scroll-y="true" class="container discovery"   scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+<view wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' >
+    <view class="feed-item">
           <view class="feed-source">
-                <!-- <a class=""> -->
-                  <view class="avatar">
+                <view class="avatar">
                       <image src="{{DataPostArry[index].UserHeadurl}}"></image>
                   </view>
                   <text c>{{item.feed_source_name}}{{DataPostArry[index].Username}}</text>
-                <!-- </a> -->
-                <!-- 更多图标 -->
-                <!-- <image class="item-more" mode="aspectFit" src="../../images/more.png"></image> -->
           </view>
           <view class="feed-content">
               <!-- 问题部分 -->
@@ -71,7 +36,7 @@
         </view>
     </view> 
     <!-- </block> -->
-  </view>
+
   <view class="ctnt1 placehold" hidden="{{currentNavtab==1 ? '' : true}}">
     <view wx:for="{{DataPostArry.length}}" wx:key='DataPostArry.length' >
         <view class="feed-item">
@@ -111,4 +76,3 @@
     </view>
   </view>
   </scroll-view>
-</scroll-view>

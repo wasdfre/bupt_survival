@@ -1,4 +1,4 @@
-//discovery.js
+//search.js
 const app = getApp()
 var util = require('../../utils/util.js')
 var that = this
@@ -19,7 +19,7 @@ Page({
     DataPostArry_Heat:[], 
     //用户头像列表             
     UserHeadurlArry:[],    
-    //点赞信息列表
+    //信息列表
     UpArray: [],
     //用户名列表                    
     UsernameArry: [],   

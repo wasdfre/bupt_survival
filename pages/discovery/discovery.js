@@ -18,12 +18,6 @@ Page({
       '../../images/24280.jpg',
       '../../images/1444983318907-_DSC1826.jpg'
     ],
-    indicatorDots: false,
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
-    feed: [],
-    feed_length: 0,
     //按时间排序问题内容列表
     DataPostArry:[], 
     //按热度排序问题内容列表
@@ -166,17 +160,4 @@ search:function(res)
 onReachBottom() {
   this.more();
 },
-
-// //至顶
-// gotop() {
-//   wx.pageScrollTo({
-//         scrollTop: 0
-//   })
-// },
-// //监测屏幕滚动
-// onPageScroll: function (e) {
-//   this.setData({
-//         scrollTop: parseInt((e.scrollTop) * wx.getSystemInfoSync().pixelRatio)
-//   })
-// },
 })

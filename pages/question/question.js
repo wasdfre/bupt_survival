@@ -8,11 +8,6 @@ Page({
   data: {
     motto: '提问',//上方标题
     discussShow: false,//不管这个
-    // inputMessage: '',
-    // SendTime: '',
-    // Time: '',
-    // HeadImageUrl: '',
-    // UserName: '',
     PageId: '',//页面id
     UpPageId: '',//点赞人id
     RemoveId: '',//删除id
@@ -24,12 +19,6 @@ Page({
     Up_Record_num:'',
     Reply_Record_num:'',
   },
-  //点击回答本身
-  // bindItemTap: function() {
-  //   wx.navigateTo({
-  //     url: '../answer/answer'
-  //   })
-  // },
   //加载函数
   //使用用户id作用用户标识，使用问题id作为问题标识
   //逻辑就是查找用户的，查找自己的
@@ -38,7 +27,7 @@ Page({
   //获取对应问题内容
   get_one_question:function(PageId)
   {
-    //主义this与that的使用
+    //注意this与that的使用
     var that=this
     //根据贴子ID来查找贴子的内容
     db.collection('Assistant_DataSheet').doc(PageId).get
@@ -54,6 +43,8 @@ Page({
       }
     })
   },
+
+
   //获取对应问题回复
   get_answer:function()
   {
@@ -75,6 +66,8 @@ Page({
      })
 
   },
+
+
   //获得回答者信息
   get_answer_uesrdata:function()
   {
@@ -139,7 +132,6 @@ Page({
         //根据回答的openid查找他的头像和用户名
         that.get_answer_uesrdata();
         //空余，是否对自己的回答特殊处理，如删除等
-        //
       }
     })
   },
@@ -151,7 +143,7 @@ Page({
   },
 
 
-//增加点赞信息
+//数据库增加点赞信息
 upload_up_data:function()
 {
   var that = this;
@@ -174,8 +166,34 @@ upload_up_data:function()
   )
 },
 
+//点踩后，数据库向对应问题数据减少赞数
+add_down_number:function()
+{
+  var that = this;
+  wx.cloud.callFunction
+  ({
+    name: 'Down_Assistant_Post',
+    data: 
+    {
+      Post_id:that.data.PageId,
+    },
+    success: function (res)
+    {
+      console.log("Up_Assistant_Post OK!");
+      //重新渲染页面
+      that.get_DBinf()
+      //显示已点赞图标
+      wx.showToast
+      ({
+        title: '已点踩',
+        image: '../../images/Up_heart.png',
+        duration: 2000
+      })
+    }
+  })
+},
 
-//向对应问题数据增加赞数
+//数据库向对应问题数据增加赞数
 add_up_number:function()
 {
   var that = this;
@@ -202,7 +220,7 @@ add_up_number:function()
   })
 },
 
-  //点赞部分
+//点击点赞按钮时
 upclickbutton: function (e) 
 {
   if (1)//说明没点赞过，这里设置为1是为了方便调试
@@ -222,7 +240,25 @@ upclickbutton: function (e)
     }
   },
 
-  //跳转到回答问题界面
+
+  //点击点踩按钮时
+  downclickbutton: function (e)
+  {
+    var that = this
+    if (1)//this.data.UpArray[ind] == 0)//说明没点过
+    {
+        that.add_down_number()
+    }
+    else{
+      wx.showToast({
+        title: '已点踩过',
+        image: '../../images/Up_heart2.png',
+        duration: 2000
+      })
+    }
+  },
+
+  //点击回答问题，跳转到回答问题界面
   Touch:function(e)
   {
     var that = this
@@ -240,47 +276,8 @@ upclickbutton: function (e)
   },
 
 
-//向对应问题数据赞数
-add_down_number:function()
-{
-  var that = this;
-  wx.cloud.callFunction
-  ({
-    name: 'Down_Assistant_Post',
-    data: 
-    {
-      Post_id:that.data.PageId,
-    },
-    success: function (res)
-    {
-      console.log("Up_Assistant_Post OK!");
-      //重新渲染页面
-      that.get_DBinf()
-      //显示已点赞图标
-      wx.showToast
-      ({
-        title: '已点踩',
-        image: '../../images/Up_heart.png',
-        duration: 2000
-      })
-    }
-  })
-},
-  //点踩函数，和点赞相同，就是云函数变了一下
-  downclickbutton: function (e)
-  {
-    var that = this
-    if (1)//this.data.UpArray[ind] == 0)//说明没点过
-    {
-        that.add_down_number()
-    }
-    else{
-      wx.showToast({
-        title: '已点踩过',
-        image: '../../images/Up_heart2.png',
-        duration: 2000
-      })
-    }
-  },
+
+
+
 
 })

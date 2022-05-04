@@ -275,9 +275,4 @@ upclickbutton: function (e)
     })
   },
 
-
-
-
-
-
 })

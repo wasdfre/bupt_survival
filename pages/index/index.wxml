@@ -1,58 +1,66 @@
-
+<cu-custom bgColor="bg-gradual-pink" >
+	<view slot="backText">返回</view>
+	<!-- <view slot="content">表单</view> -->
+</cu-custom>
 
 <!-- 第一层 -->
 <view class='head_view'>
-   <view class="text_view">
- <!-- 创建交流topic界面 -->
- <!-- autofoucus -->
-    <textarea placeholder="请填写话题内容 (不少于2个字)" auto-focus maxlength="50" auto-focus="{{false}}" bindinput="getQuestion"/>
-  </view>
- <view class="text_view">
- <!-- 创建交流topic界面 -->
- <!-- autofoucus -->
-    <textarea placeholder="请填写话题内容 (不少于2个字)" auto-focus maxlength="50" auto-focus="{{false}}" bindinput="getQuestiondes"/>
-  </view>
+
+  <view class="cu-form-group align-start">
+		<view class="title">问题   </view>
+		<textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="getQuestion" placeholder="请输入5个字以上"></textarea>
+	</view>
+
+  <view class="cu-form-group align-start">
+		<view class="title">问题描述</view>
+		<textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="getQuestiondes" placeholder="请输入5个字以上"></textarea>
+	</view>
+
 </view>
 
 <!-- 第二层 -->
 <view class='main_view'>
- <view class="three_view">
-  <view>
-    <view style="font-size:36rpx">
-    添加图片
-    </view>
-    <view class="pictuer_text">
-     图片仅支持6张
-    </view>
-  </view>
- 
-  <view class="pictuer_view">
 
-  <block wx:for="{{number}}" wx:if="{{index!=6}}" wx:key="key">
-     <!-- 0 -->
-      <block wx:if="{{index==number-1 }}">
-        <image src="../../images/add.png" style="width:160rpx;height:160rpx;border:1rpx solid silver;"bindtap='addImage' ></image>
-      </block>
-       <!-- >0-->
-      <block wx:else>
-        <image src="{{Filepath[index]}}" style="width:160rpx;height:160rpx;"bindtap='clickimage' data-index="{{index}}" bindlongpress="deleteImage"></image>
-      </block>
-  </block>
+ <!-- <view class="three_view"> -->
+  <!-- <view> -->
+    <!-- <view class="action"> -->
+			<!-- 图片上传 -->
+		<!-- </view> -->
+    <!-- <view class="pictuer_text"> -->
+     <!-- 图片仅支持6张 -->
+    <!-- </view> -->
+  <!-- </view> -->
 
-  </view>
-   <!-- 第三层 -->
-  <view class="type_text">
-  <text>标签类型:{{PostType}}</text>
-   <!--> <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-    <view class="picker">
-     标签   #{{array[index]}}
+	<view class="cu-bar bg-white margin-top">
+		<view class="action">
+			图片上传
+		</view>
+		<view class="action">
+			{{imgList.length}}/6
+		</view>
+	</view>
+
+
+
+
+    <view class="cu-form-group">
+      <view class="grid col-4 grid-square flex-sub">
+        <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}"data-url="{{imgList[index]}}">
+          <image src='{{imgList[index]}}' mode='aspectFill'></image>
+          <view class="cu-tag bg-red" catchtap="deleteImage" data-index="{{index}}">
+            <text class="cuIcon-close"></text>
+          </view>
+        </view>
+        <view class="solids" bindtap="addImage" wx:if="{{index!=6}}">
+          <text class="cuIcon-cameraadd"></text>
+        </view>
+      </view>
     </view>
-  </picker><-->
-  <view style="width:55rpx;height:100%"></view>
-  </view>
 
- </view>
 </view>
+  <!-- </view> -->
+
+
  <!-- 第四层 -->
 <view class="button_view">
   <button class="upload_button" bindtap='upload'>发     布</button>

@@ -26,7 +26,7 @@ Page({
   },
   switchTab: function(e){
     this.setData({
-      currentNavtab: e.currentTarget.dataset.idx
+      currentNavtab: e.currentTarget.dataset.id
     });
   },
 //别人评论我

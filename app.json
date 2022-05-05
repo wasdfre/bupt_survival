@@ -17,7 +17,7 @@
   ],
   "window": {
     "background": "linear-gradient(45deg, #0081ff, #1cbbb4)",
-    "navigationBarBackgroundColor": "linear-gradient(45deg, #0081ff, #1cbbb4)",
+
     "navigationBarTitleText": "北邮生存指南",
     "navigationStyle": "custom",
     "navigationBarTextStyle": "white"

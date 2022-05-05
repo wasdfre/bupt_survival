@@ -6,15 +6,17 @@ var data = {env: 'a123-4gjil6fj4c251504'}//云开发环境id
 Page({
 
   data: {
-    index: 0,
-    number: 1,
+    index: null,
+    number: 0,
     PostType:'',
     avatarUrl: '../../images/user-unlogin.png',
     user_openid: app.globalData.openid,
     telValue: "",
     question: "",
     questiondes: "",
+    imgList: [],
     UserInfo:''
+    
 
   },
   //获得输入区输入
@@ -35,33 +37,48 @@ Page({
   //点击查看
   clickimage: function (e) 
   {
-    var index = e.target.dataset.index
+    // var index = e.target.dataset.index
     //var current = e.target.dataset.src;
-    console.log(e)
-    wx.previewImage
-    ({
-      //current: current, // 当前显示图片的http链接
-      urls: [this.data.Filepath[index]], // 需要预览的图片http链接列表
+    wx.previewImage({
+      urls: this.data.imgList,
+      current: e.currentTarget.dataset.url
+    });
+    // console.log(e)
+    // wx.previewImage
+    // ({
+    //   //current: current, // 当前显示图片的http链接
+    //   urls: [this.data.imgList[index]], // 需要预览的图片http链接列表
       
-    })
+    // })
   },
   //从相册中添加相片
   addImage: function (e)
   {
     var that = this
+
     wx.chooseImage
     ({
       count: 6,
-      sizeType: ['compressed'],
+      sizeType: ['compressed'],//默认压缩图片
       sourceType: ['album', 'camera'],
       success: function (res) 
       {
-        // console.log(res.tempFilePaths)
-        that.setData
-        ({
-          Filepath: res.tempFilePaths,
-          number: res.tempFilePaths.length + 1
-        })
+        if (that.data.imgList.length != 0) {
+          that.setData({
+            imgList: that.data.imgList.concat(res.tempFilePaths)
+          })
+        } else {
+          that.setData({
+            imgList: res.tempFilePaths,
+            number: res.tempFilePaths.length + 1
+          })
+        }
+
+        // that.setData
+        // ({
+        //   Filepath: res.tempFilePaths,
+        //   number: res.tempFilePaths.length + 1
+        // })
       }
     })
   },
@@ -71,7 +88,7 @@ Page({
     var that = this
     var index = e.target.dataset.index
     // console.log("+++++++++", index)
-    var tempFilePaths = that.data.Filepath
+    var tempFilePaths = that.data.imgList
     wx.showModal
     ({
       title: '提示',
@@ -80,19 +97,17 @@ Page({
       {
         if (res.confirm)
         {
-          console.log('点击确定了');
           tempFilePaths.splice(index, 1);
         } else if (res.cancel) 
         {
-          console.log('点击取消了');
           return false;
         }
         that.setData
         ({
-          Filepath: tempFilePaths,
-          number: that.data.number - 1
+          imgList: tempFilePaths,
+          number: that.data.number //这里是不是要改一下
         });
-        console.log(that.data.Filepath);
+        console.log(that.data.imgList);
       }
     })
 
@@ -102,7 +117,7 @@ Page({
   upload_photo_question:function()
   {
     var that=this 
-    Promise.all(that.data.Filepath.map((value) => {
+    Promise.all(that.data.imgList.map((value) => {
       return wx.cloud.uploadFile
       ({
         //云存储路径,使用时间+随机数+regex匹配
@@ -168,7 +183,7 @@ Page({
       wx.showLoading({
         title: '上传中...',
       })
-      if (that.data.number > 1)//图片数量大于1实际是0,即有图片上传
+      if (that.data.number > 0)//即有图片上传
       {//保存键值对
         that.upload_photo_question();
       }

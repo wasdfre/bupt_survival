@@ -40,8 +40,17 @@ Page({
   onShow: function () 
   {
     //根据openid从数据库中获取信息
+    this.tabBar() ;
     this.get_user_data();
+    
    
+  },
+  tabBar(){
+    if(typeof this.getTabBar === 'function' && this.getTabBar()){
+      this.getTabBar().setData({
+        selected:5
+      })
+    }
   },
 
   //点击我的回答

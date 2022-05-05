@@ -157,11 +157,20 @@ Page({
     //从数据库Assistant_DataSheet中，获取问题列表
     // 获取用户数据嵌套在获取问题列表后的success中
     this.get_question();
+    this.tabBar() ;
     // this.get_question();
   },
   
-
-
+  onShow: function () {
+    this.tabBar() ;
+  },
+  tabBar(){
+    if(typeof this.getTabBar === 'function' && this.getTabBar()){
+      this.getTabBar().setData({
+        selected:1
+      })
+    }
+  },
 
 search:function(res)
 {
@@ -172,6 +181,7 @@ search:function(res)
     url: '/pages/search/search'
   })
 },
+
  //获取输入框内容
  keyInput:function(e){
   this.setData({
@@ -182,4 +192,5 @@ search:function(res)
 onReachBottom() {
   // this.more();
 },
+
 })

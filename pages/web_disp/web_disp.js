@@ -17,6 +17,7 @@ Page({
     // wx.showModal({
     //   title: "container " + JSON.stringify(query),
     // })
+    this.tabBar() ;
     let tmp_url = app.globalData.entry_url;
     app.globalData.entry_url = null;
     console.log("获取 app.globalData.entry_url: ", tmp_url);
@@ -34,6 +35,17 @@ Page({
     }
   },
 
+  onShow: function () {
+    
+  },
+
+  tabBar(){
+    if(typeof this.getTabBar === 'function' && this.getTabBar()){
+      this.getTabBar().setData({
+        selected:0
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

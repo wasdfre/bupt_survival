@@ -2,7 +2,6 @@
   "pages": [
     "pages/discovery/discovery",
     "pages/more/more",
-    
     "pages/First_page/First_page",
     "pages/Login/Login",
     "pages/Mine_Reply/Mine_Reply",
@@ -17,12 +16,17 @@
     "pages/search/search"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#39b54a",
+    "background": "linear-gradient(45deg, #0081ff, #1cbbb4)",
+    "navigationBarBackgroundColor": "linear-gradient(45deg, #0081ff, #1cbbb4)",
     "navigationBarTitleText": "北邮生存指南",
     "navigationStyle": "custom",
     "navigationBarTextStyle": "white"
   },
+
+
+
   "tabBar": {
+    "custom": true,
     "color": "#626567",
     "selectedColor": "#2A8CE5",
     "backgroundColor": "#FBFBFB",
@@ -30,33 +34,23 @@
     "list": [
       {
         "pagePath": "pages/web_disp/web_disp",
-        "text": "",
-        "iconPath": "images/arti1.png",
-        "selectedIconPath": "images/arti2.png"
-      },
-      {
-        "pagePath": "pages/index/index",
-        "text": "",
-        "iconPath": "images/index.png",
-        "selectedIconPath": "images/index_focus.png"
+        "text": "发现"
       },
       {
         "pagePath": "pages/discovery/discovery",
-        "text": "",
-        "iconPath": "images/discovery.png",
-        "selectedIconPath": "images/discovery_focus.png"
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "发布"
       },
       {
         "pagePath": "pages/notify/notify",
-        "text": "",
-        "iconPath": "images/ring.png",
-        "selectedIconPath": "images/ring_focus.png"
+        "text": "消息"
       },
       {
         "pagePath": "pages/more/more",
-        "text": "",
-        "iconPath": "images/burger.png",
-        "selectedIconPath": "images/burger_focus.png"
+        "text": "我的"
       }
     ]
   },

@@ -3,10 +3,10 @@
 
 <scroll-view scroll-y class="bg-white nav" >
 
-  <cu-custom bgColor="bg-gradual-blue">
-    <!-- <view slot="backText">返回</view> -->
-    <view slot="content">北邮人生存指南</view>
-  </cu-custom>
+
+<cu-custom bgColor="bg-gradual-blue" >
+  <view slot="backText">返回</view>
+</cu-custom>
 
   <!-- 循环量为index currentNavtab当前选择 -->
    <view class="flex text-center">
@@ -71,7 +71,7 @@
                           <a>{{DataPostArry[index].Reply_Record_num}} 评论 </a>
                     </view>
                     <view class="follow-it">
-                          <a>关注问题</a>
+                          <a>{{DataPostArry[index].Time}}</a>
                     </view>
                   </view>
                 </view>
@@ -112,7 +112,7 @@
                             <a>{{DataPostArry_Heat[index].Reply_Record_num}} 评论 </a>
                         </view>
                         <view class="follow-it">
-                            <a>关注问题</a>
+                            <a>{{DataPostArry_Heat[index].Time}}</a>
                         </view>
                     </view>
                 </view>

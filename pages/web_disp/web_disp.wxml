@@ -1,2 +1,4 @@
 <!--pages/daily/index.wxml-->
+<cu-custom bgColor="bg-gradual-pink" isCustom="{{true}}"><view slot="content">操作条</view></cu-custom>
+
 <web-view src="{{url}}" bindmessage="getMSG"></web-view>

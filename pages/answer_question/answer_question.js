@@ -19,6 +19,18 @@ Page({
     image:'',
   },
 
+  onShow: function () {
+    this.tabBar() ;
+  },
+  
+  tabBar(){
+    if(typeof this.getTabBar === 'function' && this.getTabBar()){
+      this.getTabBar().setData({
+        selected:2
+      })
+    }
+  },
+
   //获得输入区输入
   getInput: function (e) 
   {

@@ -12,13 +12,18 @@ Page({
     upList: []
   },
   onShow:function () {
+    this.tabBar() ;
     this.discussMe()
-    this.searchAssistantUp()
+    this.searchAssistantUp() 
   },
-  // onLoad: function () {
-  //   this.discussMe()
-  //   this.searchAssistantUp()
-  // },
+
+  tabBar(){
+    if(typeof this.getTabBar === 'function' && this.getTabBar()){
+      this.getTabBar().setData({
+        selected:3
+      })
+    }
+  },
   switchTab: function(e){
     this.setData({
       currentNavtab: e.currentTarget.dataset.idx

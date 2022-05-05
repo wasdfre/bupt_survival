@@ -8,7 +8,12 @@
     <view slot="content">北邮人生存指南</view>
   </cu-custom>
 
-
+  <!-- 循环量为index currentNavtab当前选择 -->
+   <view class="flex text-center">
+    <view class="cu-item flex-sub {{index==currentNavtab?'text-orange cur':''}}" wx:for="{{2}}" wx:key bindtap="switchTab" data-id="{{index}}">
+      {{navTab[index]}}
+    </view>
+  </view>
 
 <!-- 搜索栏 -->
   <view class="cu-bar search bg-white"> 

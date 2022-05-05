@@ -18,6 +18,7 @@ Page({
       '../../images/24280.jpg',
       '../../images/1444983318907-_DSC1826.jpg'
     ],
+    ALLDataPostArry:[],
     //按时间排序问题内容列表
     DataPostArry:[], 
     //按热度排序问题内容列表
@@ -34,7 +35,7 @@ Page({
   {
     this.setData
     ({
-      currentNavtab: e.currentTarget.dataset.idx
+      currentNavtab: e.currentTarget.dataset.id
     });
     console.log(e)
   },
@@ -67,32 +68,45 @@ Page({
     return heat_b-heat_a;
   },
 
+  //只能请求两次
 
   //获得问题数据
   get_question:function()
   {
     //获取全部数据
-    db.collection('Assistant_DataSheet').get
+    db.collection('Assistant_DataSheet').orderBy('Time','asc').get
     ({
       success: res => 
       {
+        //这样也会改变吗?
         this.setData
         ({
-          DataPostArry: res.data
+          ALLDataPostArry: res.data,
+          // DataPostArry:res.data,
         })
+        // console
         this.get_question_uesrdata();
+        // DataPostArry:res_temp
       }
     })
+
   },
 
 
   //获取发布问题人数据
   get_question_uesrdata:function()
   {
-    var res_temp=this.data.DataPostArry;
+    //设定两个是为了实现深拷贝,放防止改动一个另一个也会变
+    var res_temp= JSON.parse(JSON.stringify(this.data.ALLDataPostArry));
+    var res_temp2= JSON.parse(JSON.stringify(this.data.ALLDataPostArry));
+    //let 与var区别 let 旨在块内有用
+    var that=this
+    // 引入做深拷贝的库
+    // console.log(323232,this.data.DataPostArry)
     console.log('dwdawdwa',res_temp)
     Promise.all(res_temp.map((item)=>item["_openid"])).then
     (
+      //数组这里是重名，控制同一片地址
       res=>
       {
         //根据所有用户的openid获取用户数据，在数据库Assistant_User
@@ -114,15 +128,19 @@ Page({
                 {
                   res_temp[i]['Username']=res.data[j].Username;
                   res_temp[i]['UserHeadurl']=res.data[j].User_head_url;
+                  res_temp2[i]['Username']=res.data[j].Username;
+                  res_temp2[i]['UserHeadurl']=res.data[j].User_head_url;
                 }
               }
             }       
-            this.setData
+            that.setData
             ({
-              DataPostArry: res_temp.reverse(),//按照时间排序
-              DataPostArry_Heat: res_temp.sort(this.sort_heat)//按照热度排序
+              DataPostArry:res_temp.reverse(),//按照时间排序
+              DataPostArry_Heat:res_temp2.sort(that.sort_heat)//按照热度排序
             });
-            console.log(11111,this.data.DataPostArry_Heat)
+            // console.log(11111,that.data.ALLDataPostArry)
+            // console.log(11111,that.data.DataPostArry)
+            // console.log(222222,that.data.DataPostArry_Heat)
           }
         )
       }
@@ -139,6 +157,7 @@ Page({
     //从数据库Assistant_DataSheet中，获取问题列表
     // 获取用户数据嵌套在获取问题列表后的success中
     this.get_question();
+    // this.get_question();
   },
   
 

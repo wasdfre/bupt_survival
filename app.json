@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/more/more",
     "pages/discovery/discovery",
+    "pages/more/more",
+    
     "pages/First_page/First_page",
     "pages/Login/Login",
     "pages/Mine_Reply/Mine_Reply",
@@ -16,12 +17,10 @@
     "pages/search/search"
   ],
   "window": {
-    "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#0068C4",
+    "navigationBarBackgroundColor": "#39b54a",
     "navigationBarTitleText": "北邮生存指南",
-    "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true,
-    "backgroundColor": "#efefef"
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#626567",

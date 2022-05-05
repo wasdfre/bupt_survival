@@ -23,6 +23,8 @@ Page({
     //按热度排序问题内容列表
     DataPostArry_Heat:[],                         
     //回复信息列表
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
     replyData: []   
   },
 
@@ -34,6 +36,7 @@ Page({
     ({
       currentNavtab: e.currentTarget.dataset.idx
     });
+    console.log(e)
   },
 
 
@@ -119,6 +122,7 @@ Page({
               DataPostArry: res_temp.reverse(),//按照时间排序
               DataPostArry_Heat: res_temp.sort(this.sort_heat)//按照热度排序
             });
+            console.log(11111,this.data.DataPostArry_Heat)
           }
         )
       }
@@ -157,6 +161,6 @@ search:function(res)
   wx.setStorageSync('input_content', this.data.keyInput)
 },
 onReachBottom() {
-  this.more();
+  // this.more();
 },
 })

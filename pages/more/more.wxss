@@ -1,5 +1,6 @@
 .UCenter-bg {
-  background-image: url(https://image.weilanwl.com/color2.0/index.jpg);
+  /* 不能使用本地地址，可以在wxml中设置 */
+  background-image: url('https://6131-a123-4gjil6fj4c251504-1303333056.tcb.qcloud.la/%E4%B8%8B%E8%BD%BD%20(1).jpg?sign=eac14af4b20bf81ee29c998c99caafde&t=1651730707');
   background-size: cover;
   height: 550rpx;
   display: flex;
@@ -9,7 +10,7 @@
   position: relative;
   flex-direction: column;
   align-items: center;
-  color: #fff;
+  color: #eee;
   font-weight: 300;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }

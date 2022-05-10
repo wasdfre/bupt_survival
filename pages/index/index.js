@@ -228,7 +228,7 @@ Page({
         })
       }
     })
-    //用于调试时快速删除
+    // 用于调试时快速删除
     // const db = wx.cloud.database({ env: 'a123-4gjil6fj4c251504' })
     // const cccc= db.command
     // // My_ReplyData

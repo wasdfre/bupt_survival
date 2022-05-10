@@ -16,10 +16,30 @@ Page({
       })
       return
     }
+    wx.getUserProfile({
+    
+      desc:'您的信息仅作为个人展示噢',
+      success: (res) => {
+      
+          console.log('获取用户信息成功', res)
+          //获取用户信息的各类操作
+      },
+      fail: (res) =>{
+      
+          console.log('获取用户信息失败',res)
+          wx.showToast({
+      
+              title: '信息授权失败~',
+              duration: 1000,
+              icon: 'error',
+              mask: true
+          })
+      }
+  })
     // 判断是否授权
     wx.getSetting({
       success: res => {
-        //console.log(res.authSetting);
+        console.log(res.authSetting);
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.cloud.callFunction({

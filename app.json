@@ -1,24 +1,25 @@
 {
   "pages": [
+    "pages/First_page/First_page",
+    "pages/Login/Login",
+
     "pages/discovery/discovery",
     "pages/temp/temp",
     "pages/more/more",
-    "pages/First_page/First_page",
-    "pages/Login/Login",
+    
     "pages/Mine_Reply/Mine_Reply",
     "pages/notify/notify",
     "pages/index/index",
     "pages/question/question",
     "pages/answer_question/answer_question",
-    "pages/answer/answer",
     "pages/web_disp/web_disp",
     "pages/feedback/feedback",
     "pages/search/search"
   ],
   "window": {
-    "background": "linear-gradient(45deg, #0081ff, #1cbbb4)",
+    "navigationBarBackgroundColor": "#0D7CFB",
     "navigationBarTitleText": "北邮生存指南",
-    
+
     "navigationBarTextStyle": "white"
   },
 

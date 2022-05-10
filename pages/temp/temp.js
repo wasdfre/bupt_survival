@@ -15,20 +15,21 @@ Page({
       })
     }
   },
-  onLoad: function () {
-    wx.navigateTo({
-      url:  "../web_disp/web_disp",
-    })
-    this.tabBar();
-    console.log("llll")
-  },
+  // onLoad: function () {
+    
+  //   wx.reLaunch({
+  //     url: '../web_disp/web_disp'
+  //   })
+  //   this.tabBar();
+  //   console.log("llll")
+  // },
   /**
    * 生命周期函数--监听页面显示
    */
   
   onShow: function () {
-    wx.navigateTo({
-      url:  "../web_disp/web_disp",
+    wx.reLaunch({
+      url: '../web_disp/web_disp'
     })
     this.tabBar() ;
   },

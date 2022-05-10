@@ -6,7 +6,7 @@ Component({
     selected:1,
     tabList:[
         {
-          "pagePath": "pages/web_disp/web_disp",
+          "pagePath": "pages/temp/temp",
           "text": "发现"
         },
         {

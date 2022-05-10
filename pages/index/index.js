@@ -240,6 +240,18 @@ Page({
     // .remove().then(res => { 
     //   console.log("delet yes",res);
     // })
-  }
+  },
+
+  onShow: function () {
+    this.tabBar() ;
+  },
+  
+  tabBar(){
+    if(typeof this.getTabBar === 'function' && this.getTabBar()){
+      this.getTabBar().setData({
+        selected:2
+      })
+    }
+  },
 
 })

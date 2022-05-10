@@ -6,7 +6,8 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
+  data: 
+  {
     url:"https://sherlockshemol.github.io"
   },
 
@@ -17,18 +18,19 @@ Page({
     // wx.showModal({
     //   title: "container " + JSON.stringify(query),
     // })
+    let that=this;
     let tmp_url = app.globalData.entry_url;
     app.globalData.entry_url = null;
     console.log("获取 app.globalData.entry_url: ", tmp_url);
     if (tmp_url) {
       // console.log("onload")
       console.log("container url: ", tmp_url)
-      this.setData({
+      that.setData({
         url: tmp_url
       })
     } else {
       console.log("container url（缺省）: ", app.globalData.DEFAULT_DAILY_URL)
-      this.setData({
+      that.setData({
         url: app.globalData.DEFAULT_DAILY_URL
       })
     }

@@ -7,7 +7,7 @@
   </view>
   <view class='body'>
     <view class='unlb'>
-     <button open-type="getUserInfo" class='unlb' bindgetuserinfo="onGetOpenid">微信登录授权</button>
+     <button open-type="getUserInfo" class='unlb' bindtap="onGetOpenid">微信登录授权</button>
     </view>
   </view>
 

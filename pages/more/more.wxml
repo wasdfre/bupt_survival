@@ -4,8 +4,11 @@
   <!-- <view class="bg-img bg-mask padding-tb-xl" style="background-image: url('https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg');height: 414rpx;"> -->
     <!-- 获取图片需要vpn -->
     <!-- 这里放一个头像背景 -->
-    <image src="{{User_head_url}}"  class="cu-avatar xl round " ></image>
-    <view class="text-lg" >{{Username}}</view>
+    <view bindtap="login_or_change">
+      <image src="{{User_head_url}}"  class="cu-avatar xl round " ></image>
+      <view class="text-lg" >{{Username}}</view>
+    </view>
+   
 
     <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>

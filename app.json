@@ -1,9 +1,8 @@
 {
   "pages": [
     "pages/First_page/First_page",
-    "pages/Login/Login",
-
     "pages/discovery/discovery",
+    "pages/Login/Login",
     "pages/temp/temp",
     "pages/more/more",
     

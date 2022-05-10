@@ -53,6 +53,25 @@ Page({
     }
   },
 
+  antuorize:function()
+  {
+
+  },
+  change:function()
+  {
+
+  },
+  login_or_change:function(e)
+  {
+      wx.getUserProfile({
+        desc: '业务需要',
+        success: res => 
+        {
+            console.log(res)
+        }
+      })
+  },
+
   //点击我的回答
   discussbutton: function ()
    {

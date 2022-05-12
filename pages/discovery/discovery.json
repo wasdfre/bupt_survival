@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": ""
-}
+    "usingComponents": {},
+
+    "navigationStyle": "custom"
+ }
+  

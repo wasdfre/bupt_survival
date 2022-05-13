@@ -11,7 +11,7 @@ Page({
     discussList:[],
     upList: []
   },
-  onShow:function () {
+  onLoad:function () {
     this.tabBar() ;
     this.discussMe()
     this.searchAssistantUp() 

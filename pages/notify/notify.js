@@ -16,10 +16,13 @@ Page({
     this.discussMe()
     this.searchAssistantUp() 
   },
-
+  onShow: function () {
+    this.tabBar() ;
+  },
   tabBar(){
     if(typeof this.getTabBar === 'function' && this.getTabBar()){
-      this.getTabBar().setData({
+      this.getTabBar().setData
+      ({
         selected:3
       })
     }

@@ -62,5 +62,5 @@
 
  <!-- 第四层 -->
 <view class="button_view">
-  <button class="upload_button" bindtap='upload'>发     布</button>
+  <button class="cu-btn round lg text-blue" bindtap='upload'>发     布</button>
 </view>

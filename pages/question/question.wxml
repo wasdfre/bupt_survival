@@ -1,14 +1,13 @@
 <!--question.wxml-->
+
+  <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+  </cu-custom>
+
 <view class="container">
     <view class="question-wrp">
         <view class="question-item">
-            <view class="que-tag">
-                <text class="tag">阅读</text>
-                <text class="tag">电子书</text>
-                <text class="tag">Kindle</text>
-                <text class="tag">书籍</text>
-                <text class="tag">文学</text>
-            </view>
+    
             <view class="que-title">
                 <text>{{PageData.Question}}</text>
             </view>
@@ -21,12 +20,18 @@
                 <view class="left">
                     <!-- 点赞总数 -->
                     <view class="watch">
-                        <image src="../../images/eye.png"></image>
+                        <image src="../../images/点赞 (1).png"></image>
                         <text>{{Up_Record_num}}</text>
                     </view>
+
+                    <view class="comment">
+                        <image src="../../images/踩.png"></image>
+                        <text>{{Up_Record_num}}</text>
+                    </view>
+
                     <!-- 回答总数-->
                     <view class="comment">
-                        <image src="../../images/comment2.png"></image>
+                        <image src="../../images/评论.png"></image>
                         <text>{{Reply_Record_num}}</text>
                     </view>
                 </view>
@@ -41,12 +46,12 @@
         <view class="que-operate flex-wrp">
             <!-- 邀请回答 -->
             <view class="invite flex-item" bindtap='upclickbutton' data-post_id="{{PageId}}" data-postopenid="{{PostUserId}}">
-                <image src="../../images/invite.png"></image>
+                <image src="../../images/点赞 (1).png"></image>
                 <text>点赞</text>
             </view>
             <!-- 自己写回答——即评论-->
             <view class="write flex-item" bindtap='downclickbutton'  data-post_id="{{PageId}}" data-postopenid="{{PostUserId}}">
-                <image src="../../images/write.png" ></image>
+                <image src="../../images/踩.png" ></image>
                 <text>点踩</text>
             </view>
         </view>
